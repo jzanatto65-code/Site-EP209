@@ -240,7 +240,7 @@
 <body>
 
 <figure class="hero-figure">
-  <figcaption class="hero-cap"><span class="wrap"><span class="pill">Studio EP209 &middot; Essential Perdizes</span></span></figcaption>
+  <figcaption class="hero-cap"><span class="wrap"><span class="pill">Essential Perdizes - Studio EP209</span></span></figcaption>
 </figure>
 
 <header class="masthead">
@@ -249,7 +249,7 @@
     <h1>A vizinhança do <em>Studio EP209</em></h1>
     <p class="lede">Tudo o que dá para resolver a pé a partir do <strong>Essential Perdizes</strong> (Rua João Ramalho, 1.041) — padaria antes da reunião, mercado no fim do dia, farmácia, academia e os clássicos de Perdizes para levar uma visita. As distâncias foram medidas no Google Maps, do endereço do prédio até cada local.</p>
     <div class="runline">
-      <span><b>64</b> endereços</span>
+      <span><b>68</b> endereços</span>
       <span><b>Perdizes</b>, São&nbsp;Paulo</span>
       <span>origem: <b>Rua João Ramalho, 1.041</b></span>
       <span>a pé &amp; de carro pelo <b>Google Maps</b></span>
@@ -488,9 +488,9 @@ const PLACES = [
    addr:"Av. Sumaré, 275",hours:"Fecha às 20h",tel:"11 4020-5376",
    url:"https://www.leroymerlin.com.br/",link:"leroymerlin.com.br"},
   {t:2,cat:"Serviços",name:"Acesso Park",tipo:"Estacionamento",walk:"7 min",dist:"400 m",car:"",
-   desc:"Garagem de estacionamento para diária ou pernoite — útil para quem chega de carro, já que o studio é sem vaga.",
-   addr:"R. Iperoig, 516",hours:"Fecha às 20h",tel:"11 99754-4875",
-   url:"https://maps.app.goo.gl/SRtYKdnseWRc9maLA",link:"ver no mapa"},
+   desc:"Estacionamento coberto com lava-rápido — diária ou pernoite, útil para quem chega de carro, já que o studio é sem vaga.",
+   addr:"R. Iperoig, 516",hours:"Fecha às 18h",tel:"11 96679-4446",
+   url:"https://maps.app.goo.gl/JnS9jjwd7m6hqeDaA",link:"ver no mapa"},
   {t:2,cat:"Alimentação",name:"Chiquinho Bar & Espetinhos",tipo:"Bar",walk:"6 min",dist:"400 m",car:"",
    desc:"Boteco simples e acolhedor de espetinhos, porções e chope gelado.",
    addr:"R. Dr. Homem de Melo, 952",hours:"Fecha às 00h",tel:"11 3675-2177",
@@ -554,7 +554,24 @@ const PLACES = [
   {t:3,cat:"Serviços",name:"Seven Day Beauty",tipo:"Cabeleireiro",walk:"16 min",dist:"1,1 km",car:"5 min",
    desc:"Salão de cabeleireiro e beleza no polo da Rua Tucuna.",
    addr:"R. Tucuna, 283",hours:"Fecha às 20h",tel:"11 3872-8415",
-   url:"https://maps.app.goo.gl/NH849Nmne3pTViMU6",link:"ver no mapa"}
+   url:"https://maps.app.goo.gl/NH849Nmne3pTViMU6",link:"ver no mapa"},
+
+  {t:1,cat:"Alimentação",name:"Fibraleve",tipo:"Produtos naturais",walk:"1 min",dist:"57 m",car:"",
+   desc:"Loja de produtos naturais muito bem avaliada, quase em frente ao Studio — hortifruti orgânico, itens veganos e sem açúcar, suplementos e venda a granel.",
+   addr:"R. João Ramalho, 1.088",hours:"Fecha às 19h",tel:"11 3871-2178",
+   url:"https://maps.app.goo.gl/5smZs9HntbRz9vuG6",link:"ver no mapa"},
+  {t:3,cat:"Alimentação",name:"Engenharia do Hambúrguer",tipo:"Hamburgueria",walk:"15 min",dist:"900 m",car:"4 min",
+   desc:"Hamburgueria artesanal conhecida na região, com opções tradicionais e inventivas, acompanhamentos caprichados e ambiente descolado.",
+   addr:"R. Min. Gastão Mesquita, 462",hours:"Fecha às 23h30",tel:"11 3875-1430",
+   url:"https://engenhariadohamburguer.com.br/",link:"engenhariadohamburguer.com.br"},
+  {t:3,cat:"Educação",name:"Federação Internacional de Krav Magá",tipo:"Defesa pessoal",walk:"15 min",dist:"800 m",car:"3 min",
+   desc:"Escola de krav magá — defesa pessoal israelense — com aulas para adultos em todos os níveis.",
+   addr:"R. Apiacás, 893",hours:"Fecha às 22h",tel:"11 97041-9797",
+   url:"https://kravmaga.org.br/",link:"kravmaga.org.br"},
+  {t:3,cat:"Serviços",name:"Borracharia JK",tipo:"Borracharia",walk:"23 min",dist:"1,6 km",car:"12 min",
+   desc:"Borracharia bem avaliada na Água Branca — troca e conserto de pneus com equipamento moderno, aberta todos os dias.",
+   addr:"R. Carlos Vicari, 235 — Água Branca",hours:"Todos os dias 7h–21h",tel:"11 98433-2546",
+   url:"https://pneusjk.com.br/",link:"pneusjk.com.br"}
 ];
 
 const TIERS = {
@@ -603,6 +620,10 @@ function card(p){
   const facts = [`<div><dt>Endereço</dt><dd>${p.addr}</dd></div>`];
   if(p.hours) facts.push(`<div><dt>Horário</dt><dd>${p.hours}</dd></div>`);
   if(p.tel) facts.push(`<div><dt>Telefone</dt><dd>${p.tel}</dd></div>`);
+  const isMap = /maps\.app\.goo\.gl|google\.[^/]*\/maps/.test(p.url) || p.link === "ver no mapa";
+  const linkLabel = p.url
+    ? (isMap ? `📍 ${p.link}` : `🔗 ${p.link}`)
+    : (p.link || "Link não disponível");
   el.innerHTML = `
     <div class="place__head">
       <h3>${p.name}</h3>
@@ -612,9 +633,17 @@ function card(p){
     <p class="place__desc">${p.desc}</p>
     <dl class="facts">${facts.join("")}</dl>
     ${p.url
-      ? `<a class="place__link" href="${p.url}" target="_blank" rel="noopener">${p.link} ↗</a>`
-      : `<span class="place__link place__link--off">${p.link || "Link não disponível"}</span>`}`;
+      ? `<a class="place__link" href="${p.url}" target="_blank" rel="noopener">${linkLabel}</a>`
+      : `<span class="place__link place__link--off">${linkLabel}</span>`}`;
   return el;
+}
+
+function scrollToResults(){
+  const controls = document.querySelector(".controls");
+  const sticky = controls && getComputedStyle(controls).position === "sticky";
+  const offset = (sticky ? controls.offsetHeight : 0) + 8;
+  const y = app.getBoundingClientRect().top + window.pageYOffset - offset;
+  window.scrollTo({top: Math.max(0, y), behavior: "smooth"});
 }
 
 document.getElementById("filters").addEventListener("click",e=>{
@@ -623,6 +652,7 @@ document.getElementById("filters").addEventListener("click",e=>{
   activeCat = b.dataset.cat;
   document.querySelectorAll("#filters .chipbtn").forEach(x=>x.setAttribute("aria-pressed", x===b));
   render();
+  scrollToResults();
 });
 document.getElementById("q").addEventListener("input",e=>{
   query = e.target.value.trim().toLowerCase();
