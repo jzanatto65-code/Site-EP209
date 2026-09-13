@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Guia do Studio — EP209</title>
+<meta name="description" content="Guia digital interativo do Studio EP209: acesso, cozinha, conforto, tecnologia e banheiro, com fotos e detalhes de cada espaço e item disponível durante a hospedagem." />
+<meta name="theme-color" content="#2b2723" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23c05f2c'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='42' fill='%23fff' text-anchor='middle'%3EEP%3C/text%3E%3C/svg%3E" />
+<style>
+  /* ---------- Guide-specific layer (reuses tokens from styles.css) ---------- */
+  .g-top {
+    position: sticky; top: 0; z-index: 40;
+    background: rgba(246,241,233,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .g-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; }
+  .g-back { display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; font-weight: 600; color: var(--ink-soft); }
+  .g-back:hover { color: var(--terra-dark); }
+  .g-back svg { width: 18px; height: 18px; }
+  .g-top .brand__mark { font-family: var(--font-head); font-size: 1.15rem; }
+  .g-top-cta { display: flex; align-items: center; gap: 12px; }
+  .g-top .btn { padding: 11px 20px; font-size: .88rem; }
+
+  .g-hero { padding: 64px 0 44px; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .g-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.1rem); margin: 14px 0 16px; }
+  .g-hero .lead { color: var(--ink-soft); font-size: 1.08rem; max-width: 62ch; }
+  .g-runline { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 28px; }
+  .g-runline span { font-size: .86rem; color: var(--ink-soft); }
+  .g-runline b { color: var(--ink); font-weight: 700; }
+
+  .g-cats { padding: 56px 0 8px; }
+  .g-cats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+  }
+  .g-cat {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+    background: var(--paper); border: 1.5px solid var(--line); border-radius: var(--radius);
+    padding: 26px 24px; text-align: left; cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    font-family: inherit; color: inherit; width: 100%;
+  }
+  .g-cat:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--wood); }
+  .g-cat.is-active { border-color: var(--terra); background: #fff; box-shadow: var(--shadow); }
+  .g-cat__icon {
+    width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    background: var(--cream-2); font-size: 1.6rem; flex-shrink: 0;
+  }
+  .g-cat.is-active .g-cat__icon { background: var(--terra); }
+  .g-cat h3 { font-size: 1.14rem; margin: 2px 0 2px; }
+  .g-cat p { font-size: .88rem; color: var(--ink-soft); }
+  .g-cat__count { font-size: .78rem; font-weight: 600; color: var(--terra-dark); letter-spacing: .02em; }
+
+  .g-detail { padding: 8px 0 96px; }
+  .g-detail[hidden] { display: none; }
+  .g-tabs { display: flex; flex-wrap: wrap; gap: 8px; padding: 28px 0 8px; position: sticky; top: 64px; background: var(--cream); z-index: 20; }
+  .g-tab {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1.5px solid var(--line); background: var(--paper); border-radius: 999px;
+    padding: 8px 16px; font-size: .84rem; font-weight: 600; cursor: pointer; color: var(--ink-soft);
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .g-tab:hover { border-color: var(--wood); }
+  .g-tab.is-active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+
+  .g-detail-head { padding: 20px 0 4px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .g-detail-head h2 { font-size: 1.7rem; display: flex; align-items: center; gap: 10px; }
+  .g-toggle-all { font-size: .84rem; font-weight: 600; color: var(--teal); border-bottom: 1px dashed var(--teal); padding-bottom: 1px; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; font-family: inherit; }
+  .g-toggle-all:hover { color: var(--terra-dark); border-color: var(--terra-dark); }
+
+  .g-items { display: flex; flex-direction: column; gap: 14px; margin-top: 18px; }
+  .g-item { background: var(--paper); border: 1.5px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .g-item__head {
+    width: 100%; display: flex; align-items: center; gap: 14px; padding: 18px 22px;
+    background: none; border: none; cursor: pointer; text-align: left; font-family: inherit; color: inherit;
+  }
+  .g-item__emoji { font-size: 1.4rem; flex-shrink: 0; width: 34px; text-align: center; }
+  .g-item__head h3 { font-size: 1.06rem; font-weight: 600; flex: 1; font-family: var(--font-body); }
+  .g-item__chev { width: 20px; height: 20px; color: var(--ink-soft); transition: transform .2s ease; flex-shrink: 0; }
+  .g-item.is-open .g-item__chev { transform: rotate(180deg); }
+  .g-item__body { padding: 0 22px 24px 70px; }
+  .g-item__body[hidden] { display: none; }
+  .g-item__body p { color: var(--ink-soft); font-size: .96rem; margin-bottom: 12px; }
+  .g-item__body ul { margin: 0 0 14px; padding: 0; list-style: none; }
+  .g-item__body ul li {
+    position: relative; padding: 5px 0 5px 20px; font-size: .94rem; color: var(--ink-soft);
+  }
+  .g-item__body ul li::before { content: "—"; position: absolute; left: 0; color: var(--wood); }
+  .g-note {
+    background: var(--cream-2); border-left: 3px solid var(--terra); border-radius: 0 10px 10px 0;
+    padding: 12px 16px; margin: 4px 0 14px; font-size: .9rem; color: var(--ink);
+  }
+  .g-note b { color: var(--terra-dark); }
+  .g-thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+  .g-thumbs button {
+    width: 84px; height: 112px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line);
+    padding: 0; cursor: zoom-in; background: none; flex-shrink: 0;
+  }
+  .g-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s ease; }
+  .g-thumbs button:hover img { transform: scale(1.06); }
+
+  .g-lightbox {
+    position: fixed; inset: 0; background: rgba(20,17,14,.92); z-index: 200;
+    display: flex; align-items: center; justify-content: center; padding: 32px;
+  }
+  .g-lightbox[hidden] { display: none; }
+  .g-lightbox img { max-width: 100%; max-height: 86vh; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  .g-lb-btn {
+    position: absolute; background: rgba(255,255,255,.12); color: #fff; border: none; border-radius: 50%;
+    width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    transition: background .15s ease;
+  }
+  .g-lb-btn:hover { background: rgba(255,255,255,.24); }
+  .g-lb-btn svg { width: 22px; height: 22px; }
+  .g-lb-close { top: 20px; right: 20px; }
+  .g-lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+  .g-lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+  .g-lb-count { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.75); font-size: .84rem; }
+
+  .g-hint { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-size: .92rem; padding: 40px 0 0; }
+  .g-hint svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--terra); }
+
+  @media (max-width: 900px) {
+    .g-cats-grid { grid-template-columns: 1fr 1fr; }
+    .g-tabs { top: 0; }
+  }
+  @media (max-width: 640px) {
+    .g-cats-grid { grid-template-columns: 1fr; }
+    .g-item__body { padding: 0 18px 20px 18px; }
+    .g-top .btn { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="g-top">
+  <div class="wrap">
+    <a href="index.html" class="g-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="brand__mark">EP209</span>
+    </a>
+    <div class="g-top-cta">
+      <a class="btn btn--light" href="catalogo-vizinhanca-ep209.html">Vizinhança ↗</a>
+      <a class="btn btn--primary" href="https://www.airbnb.com.br/rooms/1728453226119477229" target="_blank" rel="noopener">Reservar no Airbnb</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="g-hero">
+  <div class="wrap">
+    <p class="eyebrow">Guia digital &middot; Studio EP209</p>
+    <h1>O guia completo do <em>Studio EP209</em></h1>
+    <p class="lead">Tudo o que você encontra no Studio, organizado por ambiente e assunto. Toque em uma categoria abaixo — Acesso, Cozinha, Conforto, Tecnologia, Banheiro ou Limpeza — e depois em cada item para ver a descrição completa e as fotos.</p>
+    <div class="g-runline">
+      <span><b>6</b> categorias</span>
+      <span><b>29</b> itens detalhados</span>
+      <span><b>48</b> fotos</span>
+      <span>Essential Perdizes &middot; Rua João Ramalho, 1.041</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ CATEGORY GRID ============ -->
+<section class="g-cats">
+  <div class="wrap">
+    <div class="g-cats-grid" id="catGrid"></div>
+    <p class="g-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5"/><circle cx="12" cy="8.2" r=".2" fill="currentColor"/></svg>
+      Toque em uma categoria para abrir a lista de itens com fotos e detalhes.
+    </p>
+  </div>
+</section>
+
+<!-- ============ DETAIL PANEL ============ -->
+<section class="g-detail" id="detail" hidden>
+  <div class="wrap">
+    <div class="g-tabs" id="tabs"></div>
+    <div class="g-detail-head">
+      <h2 id="detailTitle"></h2>
+      <button class="g-toggle-all" id="toggleAll" type="button">Abrir todos os itens</button>
+    </div>
+    <div class="g-items" id="items"></div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <span class="brand__mark" style="font-family:var(--font-head);font-size:1.2rem">Essential Perdizes - EP209</span>
+      <p>Guia do Studio para consulta durante a hospedagem.<br>Dúvidas? Fale com os anfitriões pelo WhatsApp.</p>
+    </div>
+    <p class="site-footer__legal">
+      Este guia é um material de apoio para hóspedes do EP209. Reservas, pagamentos e política de cancelamento são gerenciados exclusivamente pelo
+      <a href="https://www.airbnb.com.br/rooms/1728453226119477229" target="_blank" rel="noopener">anúncio no Airbnb</a>.
+    </p>
+  </div>
+</footer>
+
+<div class="float-actions">
+  <a class="float-wa" href="https://wa.me/5511950571111?text=Ol%C3%A1!%20Estou%20hospedado%20no%20EP209%20e%20tenho%20uma%20d%C3%BAvida." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.65 4.2 3.71.59.25 1.04.4 1.4.52.59.19 1.12.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="g-lightbox" id="lightbox" hidden>
+  <button class="g-lb-btn g-lb-close" id="lbClose" aria-label="Fechar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="g-lb-btn g-lb-prev" id="lbPrev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <img id="lbImg" src="" alt="" />
+  <button class="g-lb-btn g-lb-next" id="lbNext" aria-label="Próxima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
+  <div class="g-lb-count" id="lbCount"></div>
+</div>
+
+<script>
+const CATS = [
+  { key: "acesso",     emoji: "🔐", label: "Acesso & Segurança",     blurb: "Fechadura eletrônica e comunicação com a portaria." },
+  { key: "cozinha",    emoji: "🍳", label: "Cozinha",                 blurb: "Equipamentos, louças, utensílios e o cantinho do café." },
+  { key: "conforto",   emoji: "🛏️", label: "Conforto & Descanso",     blurb: "Quarto, armários, clima e o espaço multiuso com vista." },
+  { key: "tecnologia", emoji: "📺", label: "Tecnologia & Wi-Fi",      blurb: "Smart TV, streaming e internet de alta velocidade." },
+  { key: "banheiro",   emoji: "🚿", label: "Banheiro",                blurb: "Ducha, toalhas, amenities e praticidade no dia a dia." },
+  { key: "limpeza",    emoji: "🧹", label: "Limpeza & Utilidades",    blurb: "Itens de apoio para manter tudo em ordem." },
+];
+
+const IMG = n => `assets/img/guia-studio/image${n}.jpeg`;
+
+const ITEMS = [
+  { cat:"acesso", emoji:"🔐", title:"Acesso ao Studio – Fechadura Eletrônica", imgs:[1,2], blocks:[
+    {p:"O EP209 possui fechadura eletrônica digital, proporcionando praticidade e segurança durante toda a hospedagem. O acesso é realizado por meio de uma senha individual, criada especialmente para o período da sua estadia."},
+    {p:"Ao chegar ao Studio, basta utilizar no teclado da fechadura a senha de acesso informada pelo anfitrião. Não é necessário utilizar chaves ou cartões."},
+    {p:"A senha permanece válida exclusivamente durante o período da hospedagem, sendo desativada após o check-out."},
+    {note:"🛡️ Segurança adicional", p:"Quando estiver dentro do Studio, a fechadura conta com um dispositivo interno de travamento, permitindo bloquear a porta pelo lado de dentro e proporcionando maior privacidade, tranquilidade e segurança durante sua permanência."},
+    {note:"Ao sair", p:"Certifique-se sempre de que a porta ficou completamente fechada e travada."},
+  ]},
+  { cat:"acesso", emoji:"☎️", title:"Interfone – Comunicação com a Portaria e Unidades", imgs:[3], blocks:[
+    {p:"O EP209 possui interfone para comunicação interna do condomínio, facilitando o contato com a portaria e com outras unidades."},
+    {ul:["Para falar diretamente com a Portaria, digite 📞 301","Para ligar para outra unidade do condomínio, basta digitar o número correspondente ao apartamento desejado."]},
+    {p:"O interfone pode ser utilizado sempre que houver necessidade de comunicação com a portaria durante a hospedagem, especialmente para orientações, informações ou situações relacionadas ao acesso ao condomínio."},
+  ]},
+
+  { cat:"cozinha", emoji:"☕", title:"Espaço Café & Boas-Vindas", imgs:[4], blocks:[
+    {p:"Um cantinho preparado para tornar sua chegada e seus momentos de pausa ainda mais agradáveis. O EP209 disponibiliza uma Cafeteira Três Corações, acompanhada de uma seleção de cafés, chás e pequenos snacks de cortesia."},
+    {ul:["☕ 6 cápsulas de café, em três sabores diferentes","🫖 3 sachês de chá","🍪 6 snacks variados, que podem incluir biscoitos, amendoins, chocolates ou outras opções","🍬 Açúcar e adoçante"]},
+    {p:"Todos esses itens são cortesia do EP209 para você aproveitar durante sua hospedagem."},
+  ]},
+  { cat:"cozinha", emoji:"🍷", title:"Copos, Xícaras e Taças", imgs:[6], blocks:[
+    {p:"Espaço organizado para reunir os principais itens para servir bebidas durante a hospedagem, seja no café da manhã, nas refeições ou em momentos de descanso."},
+    {ul:["4 copos para água, sucos e outras bebidas","3 xícaras com pires para café, chá ou leite","3 canecas","3 taças de vinho","Garrafa decorativa com kit de abridores"]},
+    {p:"Os itens ficam dispostos em suportes próprios, facilitando a visualização, o acesso e a organização."},
+  ]},
+  { cat:"cozinha", emoji:"☕", title:"Grill & Xícaras de Café Expresso", imgs:[7], blocks:[
+    {p:"Espaço pensado para facilitar o preparo de refeições rápidas e complementar o cantinho do café do EP209."},
+    {ul:["Grill/sanduicheira, ideal para preparar sanduíches, aquecer pães e fazer pequenos lanches","3 xícaras para café expresso, com pires, organizadas em suporte próprio"]},
+  ]},
+  { cat:"cozinha", emoji:"🍽️", title:"Louças & Acessórios de Mesa", imgs:[8], blocks:[
+    {p:"Espaço destinado às louças e acessórios para as refeições, mantendo tudo organizado e de fácil acesso para os hóspedes."},
+    {ul:["3 pratos para refeições","3 pratos para sopa","3 pratos de sobremesa","3 bowls/tigelas, ideais para cereais, frutas, saladas e pequenas refeições","Porta-copos","Guardanapos em suporte próprio"]},
+  ]},
+  { cat:"cozinha", emoji:"🍳", title:"Cooktop Indução – 2 Bocas", imgs:[9], blocks:[
+    {p:"O EP209 conta com cooktop de indução de duas bocas, integrado à bancada da cozinha, proporcionando praticidade e segurança para o preparo de refeições durante a hospedagem."},
+    {p:"O equipamento possui comandos digitais sensíveis ao toque, regulagem de potência e recursos de segurança. Sobre o cooktop estão disponíveis protetores de silicone, que ajudam a preservar a superfície de vidro quando o equipamento não está em uso."},
+    {note:"Importante", p:"Por ser um cooktop de indução, utilize somente as panelas disponíveis no Studio e compatíveis com esse sistema."},
+  ]},
+  { cat:"cozinha", emoji:"🌬️", title:"Depurador de Ar Retrátil", imgs:[10,11], blocks:[
+    {p:"O EP209 conta com depurador de ar Electrolux, instalado sobre a área de preparo dos alimentos. O equipamento auxilia na redução de odores, fumaça e gordura durante o preparo das refeições, contribuindo para manter o Studio mais agradável."},
+    {p:"O depurador possui iluminação própria sobre a bancada e sistema retrátil, tornando sua utilização simples e prática."},
+    {note:"Como utilizar", p:"Para ligar o depurador, basta puxar sua base para a frente. Após o uso, empurre-a novamente até retornar à posição original."},
+    {note:"Dica", p:"Recomendamos utilizar o depurador sempre que o cooktop estiver em funcionamento, especialmente em preparos que produzam vapor, fumaça ou odores."},
+  ]},
+  { cat:"cozinha", emoji:"🚰", title:"Pia & Torneira", imgs:[12], blocks:[
+    {p:"A cozinha do EP209 conta com cuba em aço inox integrada à bancada e torneira gourmet de design moderno, proporcionando praticidade para lavar louças, utensílios e alimentos."},
+    {p:"A torneira possui bica alta e flexível, facilitando o direcionamento do fluxo de água e oferecendo maior alcance dentro da cuba."},
+    {p:"Ao lado da pia há uma lixeira de bancada com tampa, disponível para pequenos descartes durante o preparo das refeições."},
+    {p:"A bancada conta ainda com iluminação em LED, proporcionando melhor visibilidade e deixando o ambiente mais confortável durante o uso."},
+  ]},
+  { cat:"cozinha", emoji:"🍽️", title:"Microondas", imgs:[13], blocks:[
+    {p:"O EP209 conta com micro-ondas integrado à marcenaria da cozinha, proporcionando praticidade para aquecer e preparar refeições rápidas durante a estadia."},
+    {p:"O equipamento possui painel digital com diferentes funções e ajustes de tempo e potência, sendo uma opção prática para o preparo de alimentos, bebidas e refeições prontas."},
+    {p:"Após a utilização, recomendamos manter o interior do aparelho limpo e livre de resíduos, preservando o equipamento para os próximos usos."},
+    {note:"Atenção", p:"Utilize somente recipientes apropriados para micro-ondas. Não coloque objetos metálicos, papel-alumínio ou utensílios com detalhes metálicos no interior do aparelho."},
+  ]},
+  { cat:"cozinha", emoji:"🧊", title:"Frigobar Duplex", imgs:[14,15], blocks:[
+    {p:"O EP209 dispõe de geladeira compacta com freezer independente, oferecendo espaço para conservar bebidas, alimentos, frutas, refeições e produtos que necessitem de refrigeração durante a estadia."},
+    {p:"O compartimento superior funciona como freezer, enquanto a parte inferior conta com prateleira, gaveta e espaços na porta, facilitando a organização dos alimentos."},
+    {note:"💧 Cortesia EP209", p:"Para sua chegada, deixamos na geladeira uma garrafa de água mineral de 1,5 litro, como cortesia de boas-vindas."},
+    {p:"Pedimos apenas que, ao final da hospedagem, sejam retirados os alimentos e bebidas trazidos durante a estadia, colaborando com a organização do Studio."},
+  ]},
+  { cat:"cozinha", emoji:"🍳", title:"Armário Panelas & Utensílios de Cozinha", imgs:[16], blocks:[
+    {p:"Este armário concentra os principais utensílios para o preparo de refeições, deixando tudo organizado e de fácil acesso durante a hospedagem."},
+    {ul:["1 panela pequena","1 panela média","1 frigideira antiaderente","1 escorredor de macarrão","1 leiteira","1 tábua de corte","2 escorredores de louça","Kit para lavagem de louças, com detergente, esponja e rodinho de pia"]},
+    {p:"Os utensílios foram selecionados para atender às necessidades do dia a dia e permitir o preparo de refeições simples e práticas no EP209."},
+  ]},
+  { cat:"cozinha", emoji:"🍴", title:"Gaveta de Talheres & Utensílios de Cozinha", imgs:[17], blocks:[
+    {p:"Esta gaveta reúne os talheres e utensílios essenciais para refeições e preparo de alimentos, organizados para facilitar o uso durante a hospedagem."},
+    {ul:["3 garfos","3 facas de mesa","3 colheres","3 garfos de sobremesa","3 colheres de sobremesa","1 abridor de latas","3 facas de cozinha: pão, carne e legumes","1 colher de silicone","1 mexedor de silicone","1 pegador de macarrão","1 tesoura"]},
+    {p:"Tudo organizado em compartimentos para que os hóspedes encontrem facilmente o que precisam tanto para o preparo quanto para as refeições no EP209."},
+  ]},
+  { cat:"cozinha", emoji:"🍽️", title:"Gaveta de Apoio para Refeições e Cozinha", imgs:[18], blocks:[
+    {p:"Esta gaveta reúne itens de apoio para servir as refeições e utilizar a cozinha com mais praticidade, mantendo os acessórios organizados e de fácil acesso."},
+    {ul:["2 jogos americanos","1 pano de prato","2 descansos de panela","1 apoio térmico de silicone, indicado para apoiar panelas, frigideiras e outros recipientes quentes, ajudando a proteger a bancada"]},
+    {p:"Após a utilização, pedimos que os itens sejam devolvidos a esta gaveta, contribuindo para a organização do EP209."},
+  ]},
+
+  { cat:"limpeza", emoji:"🧹", title:"Armário de Serviços", imgs:[5], blocks:[
+    {p:"O EP209 conta com um Armário de Serviços que reúne itens de apoio para pequenas necessidades durante a hospedagem, facilitando a organização e a manutenção do Studio."},
+    {ul:["🧹 Aspirador de pó","🪟 Rodinho","🪜 Escada","🧽 Pano de chão","🗑️ Sacos de lixo","🌿 Aromatizador de ambiente","🧺 Tapete de serviço"]},
+    {p:"Os itens ficam organizados em um único local e estão à disposição do hóspede sempre que necessário durante a estadia."},
+  ]},
+
+  { cat:"conforto", emoji:"🪑", title:"Canto Alemão – Espaço de Descanso", imgs:[19], blocks:[
+    {p:"O EP209 conta com um canto alemão integrado ao ambiente, projetado para aproveitar de forma inteligente e aconchegante o espaço do Studio."},
+    {p:"Possui banco estofado, encosto em madeira e almofada de apoio, proporcionando um local confortável para sentar, relaxar, fazer uma pausa ou simplesmente aproveitar o ambiente."},
+    {p:"O espaço conta ainda com tomadas de fácil acesso, úteis para carregar celulares e outros dispositivos eletrônicos."},
+    {p:"Um cantinho charmoso, confortável e funcional que complementa o ambiente do EP209."},
+  ]},
+  { cat:"conforto", emoji:"👕", title:"Guarda-Roupa e Gavetas para Pertences", imgs:[20], blocks:[
+    {p:"O EP209 conta com um espaço aberto para organização de roupas e objetos pessoais, facilitando a acomodação dos pertences durante a hospedagem."},
+    {p:"O espaço dispõe de guarda-roupa com oito cabides, ideal para manter camisas, vestidos, casacos e outras peças organizadas, além de duas gavetas de apoio para roupas dobradas, acessórios e demais objetos pessoais."},
+    {p:"Uma solução prática e funcional para deixar seus pertences organizados e facilmente acessíveis durante a estadia."},
+  ]},
+  { cat:"conforto", emoji:"🛏️", title:"Enxoval Extra – Conforto para sua Estadia", imgs:[21], blocks:[
+    {p:"No armário superior do EP209 estão disponíveis bolsas organizadoras de enxoval, que mantêm as peças protegidas, organizadas e prontas para uso sempre que necessário."},
+    {ul:["2 travesseiros adicionais","1 edredom tamanho queen","1 manta tamanho queen"]},
+    {p:"Os itens ficam acondicionados nas bolsas organizadoras, facilitando a identificação e preservando o enxoval durante a hospedagem."},
+    {p:"Um cuidado adicional do EP209 para proporcionar mais conforto, especialmente nas noites mais frias."},
+  ]},
+  { cat:"conforto", emoji:"👟", title:"Sapateira – Organização dos Calçados", imgs:[22], blocks:[
+    {p:"O EP209 conta com um espaço dedicado para acomodação de calçados, localizado na parte inferior do guarda-roupa."},
+    {p:"A sapateira permite manter sapatos, tênis e outros calçados organizados e separados das roupas e demais pertences pessoais, contribuindo para deixar o Studio mais organizado durante toda a hospedagem."},
+    {p:"Ao chegar, você pode acomodar seus calçados neste espaço e aproveitar o EP209 com mais conforto e praticidade."},
+  ]},
+  { cat:"conforto", emoji:"🗄️", title:"Gaveta para Pertences Pessoais", imgs:[23], blocks:[
+    {p:"O EP209 dispõe de gaveta ampla e de fácil acesso, oferecendo um espaço adicional para que o hóspede possa organizar seus pertences durante a estadia."},
+    {p:"É ideal para acomodar roupas dobradas, acessórios e outros objetos pessoais, ajudando a manter o Studio organizado e proporcionando mais praticidade, especialmente em estadias mais longas."},
+  ]},
+  { cat:"conforto", emoji:"🧳", title:"Espaço para Bagagens e Pertences", imgs:[25], blocks:[
+    {p:"O EP209 conta com um armário de apoio na parte inferior do móvel da TV, com duas prateleiras e portas, oferecendo espaço adicional para organização durante a hospedagem."},
+    {p:"O compartimento pode ser utilizado para acomodar bolsas, mochilas pequenas, sacolas, acessórios, roupas dobradas e outros objetos pessoais, contribuindo para manter o Studio organizado e os pertences facilmente acessíveis."},
+    {note:"Importante", p:"Devido às dimensões do compartimento, o espaço não é destinado ao armazenamento de malas."},
+  ]},
+  { cat:"conforto", emoji:"🛏️", title:"Área de Descanso – Cama Queen + Cama Auxiliar", imgs:[26,27], blocks:[
+    {p:"O EP209 foi planejado para acomodar confortavelmente até 3 hóspedes. O ambiente conta com uma cama queen, preparada com enxoval completo, além de uma cama auxiliar de solteiro, disponível para acomodar o terceiro hóspede."},
+    {p:"A área de descanso possui cabeceira com iluminação indireta, luminárias pendentes, criado-mudo, ar-condicionado e espelho de corpo inteiro, criando um ambiente moderno, acolhedor e funcional."},
+    {p:"A iluminação cuidadosamente distribuída e os acabamentos em madeira tornam o espaço ainda mais aconchegante, proporcionando conforto tanto para estadias curtas quanto para períodos mais prolongados."},
+  ]},
+  { cat:"conforto", emoji:"🗄️", title:"Criado-mudo, Controles e Gavetas de Apoio", imgs:[28], blocks:[
+    {p:"Ao lado da cama, o EP209 conta com um criado-mudo com três gavetas, oferecendo espaço adicional para organizar objetos pessoais durante a hospedagem."},
+    {p:"Sobre o móvel ficam, em local de fácil acesso, o controle remoto da Smart TV e o controle do ar-condicionado."},
+    {p:"As gavetas podem ser utilizadas para guardar pequenos pertences e manter o ambiente organizado. Na última gaveta estão disponíveis os manuais dos principais aparelhos e equipamentos do Studio, para consulta sempre que necessário."},
+  ]},
+  { cat:"conforto", emoji:"🪞", title:"Espelho de Corpo Inteiro", imgs:[29], blocks:[
+    {p:"O EP209 conta com um elegante espelho de corpo inteiro, instalado em posição estratégica junto à área de descanso."},
+    {p:"Além de ser muito útil para o hóspede se arrumar antes de sair, o espelho contribui para a sensação de amplitude e luminosidade do Studio, integrando-se ao acabamento em madeira e à decoração contemporânea do ambiente."},
+  ]},
+  { cat:"conforto", emoji:"❄️", title:"Ar-Condicionado Quente e Frio", imgs:[30], blocks:[
+    {p:"O EP209 conta com ar-condicionado LG Dual Inverter, instalado na área principal do Studio e dimensionado para proporcionar conforto térmico durante a estadia."},
+    {p:"O equipamento possui funções de refrigeração e aquecimento, permitindo ajustar a temperatura de acordo com a preferência do hóspede, tanto nos dias mais quentes quanto nos períodos mais frios."},
+    {p:"O controle remoto fica disponível sobre o criado-mudo ao lado da cama, facilitando o acesso e os ajustes durante a utilização."},
+  ]},
+  { cat:"conforto", emoji:"🪟", title:"Espaço Multiuso com Vista para Perdizes", imgs:[31,32,33,34,35], blocks:[
+    {p:"Junto à ampla janela do EP209, o hóspede encontra um espaço agradável e funcional, com mesa e duas cadeiras, que pode ser utilizado tanto para refeições quanto como estação de trabalho, aproveitando a iluminação natural e a agradável vista para o bairro de Perdizes."},
+    {p:"Para proporcionar maior conforto e privacidade, a janela conta com dois tipos de cortinas: a cortina rolô, que permite a entrada de luz natural preservando a intimidade do ambiente, e a cortina blackout, que bloqueia a luminosidade externa e contribui para um sono mais confortável e tranquilo."},
+    {p:"O espaço conta ainda com uma lixeira com sensor, que realiza a abertura e o fechamento automáticos da tampa, proporcionando mais praticidade e higiene — disponível para atender todo o Studio."},
+    {p:"Um cantinho pensado para unir praticidade, privacidade, conforto e uma bela vista de Perdizes."},
+  ]},
+  { cat:"conforto", emoji:"🪟", title:"Fechamento de Vidro – Abertura e Ventilação", imgs:[36,37,38], blocks:[
+    {p:"O fechamento em vidro da janela do espaço multiuso permite regular a abertura e a ventilação do ambiente de forma prática, complementando o conforto do cantinho com vista e a climatização do Studio."},
+  ]},
+
+  { cat:"tecnologia", emoji:"📺", title:"Smart TV e Internet de Alta Velocidade", imgs:[24], blocks:[
+    {p:"O EP209 conta com Smart TV integrada ao painel de madeira, proporcionando entretenimento e compondo de forma harmoniosa a decoração do Studio."},
+    {p:"Na prateleira superior, um charmoso relógio analógico de estilo retrô acrescenta personalidade e aconchego ao ambiente, combinando elementos clássicos com a proposta contemporânea do EP209."},
+    {p:"O Studio dispõe ainda de internet Wi-Fi por fibra óptica de 600 Mbps, adequada para streaming, videochamadas, trabalho remoto e uso simultâneo de diferentes dispositivos. A rede e a senha do Wi-Fi são disponibilizadas na confirmação da estadia, juntamente com as demais informações de acesso."},
+    {note:"Dica", p:"A Smart TV permite utilizar os principais aplicativos de streaming com as contas pessoais do hóspede. Ao final da hospedagem, recomendamos sair das contas utilizadas."},
+  ]},
+
+  { cat:"banheiro", emoji:"🚿", title:"Banheiro – Conforto e praticidade nos detalhes", imgs:[39,40,41,42,43,44,45,46,47,48], blocks:[
+    {p:"O banheiro do EP209 foi equipado para oferecer uma experiência confortável e completa, reunindo itens que facilitam a rotina e tornam a estadia ainda mais agradável."},
+    {ul:[
+      "Ducha moderna e potente, com ajuste de temperatura e três opções de banho: ducha manual e dois chuveiros",
+      "Toalha de banho e de rosto para cada hóspede",
+      "Toalheiro aquecido, que mantém as toalhas secas e agradáveis para o próximo uso",
+      "Secador de cabelo",
+      "Nicho no box com dispensers de shampoo, condicionador e sabonete líquido",
+      "Sabonete individual na bancada, como amenity de boas-vindas",
+      "Algodão e demaquilante para remoção de maquiagem",
+      "Lixeira com sensor, que abre e fecha a tampa automaticamente",
+    ]},
+    {p:"Tudo foi pensado para que o hóspede encontre no EP209 um banheiro bem equipado, organizado e funcional, com pequenos cuidados que fazem diferença durante a estadia."},
+  ]},
+];
+
+// ---------- Render category grid ----------
+const catGrid = document.getElementById("catGrid");
+CATS.forEach(c => {
+  const count = ITEMS.filter(i => i.cat === c.key).length;
+  const btn = document.createElement("button");
+  btn.className = "g-cat";
+  btn.dataset.cat = c.key;
+  btn.innerHTML = `
+    <span class="g-cat__icon">${c.emoji}</span>
+    <h3>${c.label}</h3>
+    <p>${c.blurb}</p>
+    <span class="g-cat__count">${count} ${count === 1 ? "item" : "itens"}</span>
+  `;
+  btn.addEventListener("click", () => selectCategory(c.key, true));
+  catGrid.appendChild(btn);
+});
+
+// ---------- Render tabs ----------
+const tabsEl = document.getElementById("tabs");
+CATS.forEach(c => {
+  const b = document.createElement("button");
+  b.className = "g-tab";
+  b.dataset.cat = c.key;
+  b.innerHTML = `<span>${c.emoji}</span> ${c.label}`;
+  b.addEventListener("click", () => selectCategory(c.key, true));
+  tabsEl.appendChild(b);
+});
+
+const detailEl = document.getElementById("detail");
+const detailTitle = document.getElementById("detailTitle");
+const itemsEl = document.getElementById("items");
+const toggleAllBtn = document.getElementById("toggleAll");
+let currentCat = null;
+let allOpen = false;
+
+function renderNote(block) {
+  return `<div class="g-note"><b>${block.note}:</b> ${block.p}</div>`;
+}
+
+function itemBody(item) {
+  const blocksHtml = item.blocks.map(b => {
+    if (b.note) return renderNote(b);
+    if (b.ul) return `<ul>${b.ul.map(li => `<li>${li}</li>`).join("")}</ul>`;
+    return `<p>${b.p}</p>`;
+  }).join("");
+  const thumbs = item.imgs.map((n, idx) =>
+    `<button data-idx="${idx}"><img src="${IMG(n)}" alt="${item.title} — foto ${idx + 1}" loading="lazy"></button>`
+  ).join("");
+  return `${blocksHtml}<div class="g-thumbs">${thumbs}</div>`;
+}
+
+function selectCategory(key, scroll) {
+  currentCat = key;
+  allOpen = false;
+  toggleAllBtn.textContent = "Abrir todos os itens";
+
+  document.querySelectorAll(".g-cat").forEach(el => el.classList.toggle("is-active", el.dataset.cat === key));
+  document.querySelectorAll(".g-tab").forEach(el => el.classList.toggle("is-active", el.dataset.cat === key));
+
+  const cat = CATS.find(c => c.key === key);
+  detailTitle.innerHTML = `<span>${cat.emoji}</span> ${cat.label}`;
+
+  const list = ITEMS.filter(i => i.cat === key);
+  itemsEl.innerHTML = "";
+  list.forEach((item, idx) => {
+    const wrap = document.createElement("article");
+    wrap.className = "g-item";
+    wrap.innerHTML = `
+      <button class="g-item__head" type="button">
+        <span class="g-item__emoji">${item.emoji}</span>
+        <h3>${item.title}</h3>
+        <svg class="g-item__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+      <div class="g-item__body" hidden>${itemBody(item)}</div>
+    `;
+    const head = wrap.querySelector(".g-item__head");
+    const body = wrap.querySelector(".g-item__body");
+    head.addEventListener("click", () => {
+      const open = !body.hidden;
+      body.hidden = open;
+      wrap.classList.toggle("is-open", !open);
+    });
+    // lightbox wiring
+    const thumbBtns = wrap.querySelectorAll(".g-thumbs button");
+    thumbBtns.forEach(tb => {
+      tb.addEventListener("click", (e) => {
+        e.stopPropagation();
+        openLightbox(item.imgs, Number(tb.dataset.idx), item.title);
+      });
+    });
+    itemsEl.appendChild(wrap);
+  });
+
+  detailEl.hidden = false;
+  if (scroll) {
+    detailEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+toggleAllBtn.addEventListener("click", () => {
+  allOpen = !allOpen;
+  toggleAllBtn.textContent = allOpen ? "Recolher todos os itens" : "Abrir todos os itens";
+  document.querySelectorAll(".g-item").forEach(wrap => {
+    wrap.querySelector(".g-item__body").hidden = !allOpen;
+    wrap.classList.toggle("is-open", allOpen);
+  });
+});
+
+// ---------- Lightbox ----------
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lbImg");
+const lbCount = document.getElementById("lbCount");
+let lbImgs = [];
+let lbIdx = 0;
+let lbTitle = "";
+
+function openLightbox(imgs, idx, title) {
+  lbImgs = imgs;
+  lbIdx = idx;
+  lbTitle = title;
+  updateLightbox();
+  lightbox.hidden = false;
+}
+function updateLightbox() {
+  const n = lbImgs[lbIdx];
+  lbImg.src = IMG(n);
+  lbImg.alt = `${lbTitle} — foto ${lbIdx + 1}`;
+  lbCount.textContent = `${lbIdx + 1} / ${lbImgs.length}`;
+}
+document.getElementById("lbClose").addEventListener("click", () => lightbox.hidden = true);
+document.getElementById("lbPrev").addEventListener("click", () => { lbIdx = (lbIdx - 1 + lbImgs.length) % lbImgs.length; updateLightbox(); });
+document.getElementById("lbNext").addEventListener("click", () => { lbIdx = (lbIdx + 1) % lbImgs.length; updateLightbox(); });
+lightbox.addEventListener("click", (e) => { if (e.target === lightbox) lightbox.hidden = true; });
+document.addEventListener("keydown", (e) => {
+  if (lightbox.hidden) return;
+  if (e.key === "Escape") lightbox.hidden = true;
+  if (e.key === "ArrowLeft") document.getElementById("lbPrev").click();
+  if (e.key === "ArrowRight") document.getElementById("lbNext").click();
+});
+
+// Deep-link support: guia-studio-ep209.html#cozinha
+const hashCat = location.hash.replace("#", "");
+if (CATS.some(c => c.key === hashCat)) {
+  selectCategory(hashCat, true);
+}
+</script>
+</body>
+</html>

@@ -92,13 +92,15 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.12;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px; /* guarantees breathing room between brand and nav even when both are at their nowrap content width */
   height: 72px;
+  max-width: 1450px; /* header needs more room than body sections now that it carries 7 nav links + the full brand name */
 }
 .brand { display: flex; align-items: baseline; gap: 10px; font-family: var(--font-head); }
-.brand__mark { font-size: 1.35rem; font-weight: 600; letter-spacing: .04em; }
+.brand__mark { font-size: 1.35rem; font-weight: 600; letter-spacing: .04em; white-space: nowrap; }
 .brand__sub { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-soft); }
-.nav { display: flex; align-items: center; gap: 30px; }
-.nav a { font-size: .92rem; font-weight: 500; color: var(--ink-soft); transition: color .15s ease; }
+.nav { display: flex; align-items: center; gap: 14px; }
+.nav a { font-size: .92rem; font-weight: 500; color: var(--ink-soft); transition: color .15s ease; white-space: nowrap; }
 .nav a:hover { color: var(--ink); }
 .nav .btn { padding: 11px 20px; }
 .nav-toggle { display: none; background: none; border: 0; cursor: pointer; padding: 8px; }
@@ -300,7 +302,7 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.12;
 .reserve__cta { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; margin-top: 30px; }
 
 /* ---------- Footer ---------- */
-.site-footer { background: #201c18; color: rgba(246,241,233,.7); padding: 54px 0 40px; font-size: .88rem; }
+.site-footer { background: #201c18; color: rgba(246,241,233,.7); padding: 54px 0 110px; font-size: .88rem; } /* extra bottom padding keeps text clear of the fixed float-actions buttons */
 .site-footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 24px; }
 .site-footer .brand__mark { color: var(--cream); }
 .site-footer a { color: var(--cream); border-bottom: 1px solid rgba(246,241,233,.3); }
@@ -327,6 +329,23 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.12;
 .reveal.is-visible { opacity: 1; transform: none; }
 
 /* ---------- Responsive ---------- */
+/* Nav switches to the mobile menu earlier than the general layout breakpoint
+   below — with 7 links + the Reservar button, it starts wrapping awkwardly
+   on common notebook widths (1280–1366px) well before 960px. */
+@media (max-width: 1360px) {
+  .nav {
+    position: fixed; inset: 72px 0 auto 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--cream); border-bottom: 1px solid var(--line);
+    padding: 12px 24px 22px;
+    transform: translateY(-120%); transition: transform .3s ease;
+  }
+  .nav.is-open { transform: none; }
+  .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); white-space: normal; }
+  .nav .btn { margin-top: 14px; justify-content: center; }
+  .nav-toggle { display: block; }
+}
+
 @media (max-width: 960px) {
   .section { padding: 72px 0; }
   .about__grid { grid-template-columns: 1fr; gap: 36px; }
@@ -336,18 +355,6 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.12;
   .condo-grid { grid-template-columns: repeat(2, 1fr); }
   .loc-grid { grid-template-columns: 1fr; gap: 34px; }
   .loc-catalog { flex-direction: column; align-items: flex-start; text-align: left; }
-
-  .nav {
-    position: fixed; inset: 72px 0 auto 0;
-    flex-direction: column; align-items: stretch; gap: 0;
-    background: var(--cream); border-bottom: 1px solid var(--line);
-    padding: 12px 24px 22px;
-    transform: translateY(-120%); transition: transform .3s ease;
-  }
-  .nav.is-open { transform: none; }
-  .nav a { padding: 14px 0; border-bottom: 1px solid var(--line); }
-  .nav .btn { margin-top: 14px; justify-content: center; }
-  .nav-toggle { display: block; }
 }
 
 @media (max-width: 560px) {
@@ -365,7 +372,6 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.12;
   .float-wa { padding: 13px; }
   .hero__badge { flex-wrap: wrap; gap: 6px 10px; }
   .hero__badge-sep { display: none; }
-  .site-footer { padding-bottom: 84px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
