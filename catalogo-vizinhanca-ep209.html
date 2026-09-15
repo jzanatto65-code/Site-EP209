@@ -57,6 +57,23 @@
   ::selection{background:var(--accent);color:#fff}
   .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
+  /* ---------- back bar ---------- */
+  .backbar{
+    position:sticky;top:0;z-index:30;
+    background:rgba(247,245,239,.92);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .backbar .wrap{display:flex;align-items:center;padding:11px 24px}
+  .backlink{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-soft);text-decoration:none;
+  }
+  .backlink:hover{color:var(--accent-ink)}
+  .backlink svg{width:16px;height:16px}
+
   /* ---------- hero ---------- */
   .hero-figure{
     position:relative;
@@ -110,7 +127,7 @@
 
   /* ---------- controls ---------- */
   .controls{
-    position:sticky;top:0;z-index:20;
+    position:sticky;top:44px;z-index:20;
     background:var(--paper);
     border-bottom:1px solid var(--line);
     padding:13px 0;
@@ -238,6 +255,15 @@
 </style>
 </head>
 <body>
+
+<div class="backbar">
+  <div class="wrap">
+    <a href="index.html" class="backlink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span>EP209</span>
+    </a>
+  </div>
+</div>
 
 <figure class="hero-figure">
   <figcaption class="hero-cap"><span class="wrap"><span class="pill">Essential Perdizes - Studio EP209</span></span></figcaption>
@@ -640,8 +666,9 @@ function card(p){
 
 function scrollToResults(){
   const controls = document.querySelector(".controls");
+  const backbar = document.querySelector(".backbar");
   const sticky = controls && getComputedStyle(controls).position === "sticky";
-  const offset = (sticky ? controls.offsetHeight : 0) + 8;
+  const offset = (sticky ? controls.offsetHeight + (backbar ? backbar.offsetHeight : 0) : 0) + 8;
   const y = app.getBoundingClientRect().top + window.pageYOffset - offset;
   window.scrollTo({top: Math.max(0, y), behavior: "smooth"});
 }

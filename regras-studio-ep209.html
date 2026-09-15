@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Regras de Utilização — Studio EP209</title>
+<meta name="description" content="Regras de utilização do Studio EP209: check-in e check-out, cuidados com cozinha e banheiro, ar-condicionado, Smart TV, roupa de cama extra, fumo, pets e comunicação com o anfitrião." />
+<meta name="theme-color" content="#2b2723" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="assets/css/styles.css" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23c05f2c'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='42' fill='%23fff' text-anchor='middle'%3EEP%3C/text%3E%3C/svg%3E" />
+<style>
+  /* ---------- Rules-specific layer (reuses tokens from styles.css) ---------- */
+  .r-top {
+    position: sticky; top: 0; z-index: 40; height: 72px;
+    background: rgba(246,241,233,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .r-top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 100%; padding: 0 24px; }
+  .r-back { display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; font-weight: 600; color: var(--ink-soft); }
+  .r-back:hover { color: var(--terra-dark); }
+  .r-back svg { width: 18px; height: 18px; }
+  .r-top .brand__mark { font-family: var(--font-head); font-size: 1.15rem; }
+  .r-top-cta { display: flex; align-items: center; gap: 12px; }
+  .r-top .btn { padding: 11px 20px; font-size: .88rem; }
+
+  .r-hero { padding: 64px 0 40px; background: var(--paper); border-bottom: 1px solid var(--line); }
+  .r-hero h1 { font-size: clamp(2.1rem, 4.6vw, 3.1rem); margin: 14px 0 16px; }
+  .r-hero .lead { color: var(--ink-soft); font-size: 1.08rem; max-width: 68ch; }
+  .r-runline { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-top: 28px; }
+  .r-runline span { font-size: .86rem; color: var(--ink-soft); }
+  .r-runline b { color: var(--ink); font-weight: 700; }
+
+  .r-nav {
+    position: sticky; top: 72px; z-index: 30;
+    background: var(--cream); border-bottom: 1px solid var(--line);
+    padding: 16px 0;
+  }
+  .r-nav-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .r-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1.5px solid var(--line); background: var(--paper); border-radius: 999px;
+    padding: 8px 15px; font-size: .83rem; font-weight: 600; color: var(--ink-soft);
+    transition: background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  .r-pill:hover { border-color: var(--wood); }
+  .r-pill.is-active { background: var(--ink); border-color: var(--ink); color: var(--cream); }
+
+  .r-body { padding: 56px 0 24px; }
+  .r-block { padding: 30px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 148px; }
+  .r-block:last-child { border-bottom: none; }
+  .r-block__head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+  .r-block__icon {
+    width: 46px; height: 46px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--cream-2); font-size: 1.4rem;
+  }
+  .r-block h2 { font-size: 1.4rem; }
+  .r-block .r-lead { color: var(--ink-soft); font-size: .98rem; margin: 0 0 16px; max-width: 70ch; }
+  .r-list { list-style: none; margin: 0 0 4px; padding: 0; display: flex; flex-direction: column; gap: 4px; max-width: 74ch; }
+  .r-list li { position: relative; padding: 6px 0 6px 28px; font-size: .96rem; color: var(--ink-soft); }
+  .r-list li::before {
+    content: "✓"; position: absolute; left: 0; top: 6px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--cream-2); color: var(--teal);
+    font-size: .68rem; font-weight: 700; line-height: 18px; text-align: center;
+  }
+  .r-note {
+    display: flex; gap: 12px; align-items: flex-start;
+    background: var(--cream-2); border-left: 3px solid var(--terra); border-radius: 0 10px 10px 0;
+    padding: 14px 18px; margin: 16px 0 4px; font-size: .92rem; color: var(--ink); max-width: 74ch;
+  }
+  .r-note svg { width: 20px; height: 20px; flex-shrink: 0; color: var(--terra-dark); margin-top: 1px; }
+  .r-note b { color: var(--terra-dark); }
+  .r-note a { text-decoration: underline; text-underline-offset: 2px; }
+
+  .r-closing {
+    background: var(--ink); color: var(--cream); border-radius: var(--radius);
+    padding: 40px 36px; margin: 40px 0 0; text-align: center;
+  }
+  .r-closing h2 { color: var(--cream); font-size: 1.5rem; margin-bottom: 12px; }
+  .r-closing p { color: rgba(246,241,233,.78); max-width: 62ch; margin: 0 auto 8px; font-size: .98rem; }
+  .r-closing p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 900px) {
+    /* The pill row wraps into 2-3 lines on narrower screens — keeping it sticky
+       would eat too much of the viewport while scrolling, so it scrolls away
+       with the page instead (it still works fine as a plain in-flow jump list). */
+    .r-nav { position: static; }
+    .r-block { scroll-margin-top: 90px; }
+  }
+  @media (max-width: 640px) {
+    .r-top .btn { display: none; }
+    .r-closing { padding: 32px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<div class="r-top">
+  <div class="wrap">
+    <a href="index.html" class="r-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span class="brand__mark">EP209</span>
+    </a>
+    <div class="r-top-cta">
+      <a class="btn btn--light" href="guia-studio-ep209.html">Guia do Studio ↗</a>
+      <a class="btn btn--primary" href="https://www.airbnb.com.br/rooms/1728453226119477229" target="_blank" rel="noopener">Reservar no Airbnb</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="r-hero">
+  <div class="wrap">
+    <p class="eyebrow">Regras de utilização &middot; Studio EP209</p>
+    <h1>Regras de utilização do <em>Studio EP209</em></h1>
+    <p class="lead">Queremos que você aproveite o EP209 com conforto e tranquilidade, e encontre tudo preparado para uma ótima estadia. 💛 Alguns cuidados simples ajudam a preservar o Studio, seus equipamentos e o enxoval, além de facilitar a preparação do espaço para os próximos hóspedes.</p>
+    <div class="r-runline">
+      <span><b>Check-in</b> a partir das 15h</span>
+      <span><b>Check-out</b> até as 11h</span>
+      <span><b>100%</b> livre de fumo</span>
+      <span>Pets não hospedam aqui</span>
+      <span>Comunicação pelo <b>Airbnb</b></span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ QUICK NAV ============ -->
+<nav class="r-nav" aria-label="Ir para seção">
+  <div class="wrap r-nav-list" id="rNav">
+    <a class="r-pill" href="#checkin">🕒 Check-in &amp; Check-out</a>
+    <a class="r-pill" href="#cozinha">🍳 Cozinha</a>
+    <a class="r-pill" href="#banheiro">🚿 Banheiro</a>
+    <a class="r-pill" href="#ar">❄️ Ar-condicionado</a>
+    <a class="r-pill" href="#tv">📺 Smart TV</a>
+    <a class="r-pill" href="#roupa-cama">🛏️ Roupa de cama extra</a>
+    <a class="r-pill" href="#fumo">🚭 Ambiente livre de fumo</a>
+    <a class="r-pill" href="#pets">🐾 Pets</a>
+    <a class="r-pill" href="#checkout">🗑️ Check-out &amp; organização</a>
+    <a class="r-pill" href="#comunicacao">💬 Comunicação</a>
+  </div>
+</nav>
+
+<!-- ============ CONTENT ============ -->
+<main class="r-body">
+  <div class="wrap">
+
+    <section class="r-block" id="checkin">
+      <div class="r-block__head">
+        <div class="r-block__icon">🕒</div>
+        <h2>Check-in e Check-out</h2>
+      </div>
+      <p class="r-lead">Sempre que nossa agenda permitir, teremos prazer em avaliar a possibilidade de antecipar o check-in ou estender o horário de check-out.</p>
+      <ul class="r-list">
+        <li>Check-in: a partir das 15h</li>
+        <li>Check-out: até as 11h</li>
+        <li>Os horários dependem da saída e chegada de outros hóspedes e do tempo necessário para limpeza — a disponibilidade deve ser consultada previamente</li>
+      </ul>
+      <div class="r-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="15.8" r=".2" fill="currentColor"/></svg>
+        <p>Solicitações de antecipação do check-in ou extensão do check-out devem ser feitas <b>exclusivamente pela plataforma do Airbnb</b>, para que fiquem devidamente registradas. A alteração só é considerada confirmada após a aprovação do anfitrião pelo Airbnb.</p>
+      </div>
+    </section>
+
+    <section class="r-block" id="cozinha">
+      <div class="r-block__head">
+        <div class="r-block__icon">🍳</div>
+        <h2>Cozinha</h2>
+      </div>
+      <p class="r-lead">A cozinha do EP209 foi equipada para dar praticidade à sua estadia. Para mantê-la sempre agradável e organizada:</p>
+      <ul class="r-list">
+        <li>Lave pratos, copos, taças, talheres, panelas e demais utensílios após o uso</li>
+        <li>Use o escorredor de louças para secagem — evite guardar utensílios ainda molhados nos armários</li>
+        <li>Deixe cooktop, micro-ondas, grill, cafeteira e demais equipamentos limpos e desligados após o uso</li>
+        <li>Não deixe restos de alimentos ou louça suja por períodos prolongados, especialmente durante a noite</li>
+        <li>Antes do check-out, confira se não ficaram alimentos perecíveis ou itens pessoais no frigobar ou nos armários</li>
+        <li>Leve o lixo acumulado até o local de descarte indicado pelo condomínio</li>
+        <li>Antes de sair, confira se o cooktop e os demais equipamentos elétricos da cozinha estão desligados</li>
+      </ul>
+    </section>
+
+    <section class="r-block" id="banheiro">
+      <div class="r-block__head">
+        <div class="r-block__icon">🚿</div>
+        <h2>Banheiro</h2>
+      </div>
+      <p class="r-lead">Alguns cuidados ajudam a manter o banheiro agradável, preservar o enxoval e evitar excesso de umidade:</p>
+      <ul class="r-list">
+        <li>Após o banho, mantenha a porta do box fechada, ajudando a evitar que a umidade se espalhe pelo Studio</li>
+        <li>Use as toalhas de banho e rosto exclusivamente para higiene pessoal e secagem</li>
+        <li>Não utilize as toalhas para retirar maquiagem ou limpar calçados, pisos ou outros objetos — pode causar manchas permanentes</li>
+        <li>Para retirar maquiagem, use o algodão e o demaquilante disponíveis para sua comodidade</li>
+        <li>O aquecedor/porta-toalhas elétrico pode ser usado pelo tempo necessário para ajudar a secar as toalhas</li>
+        <li>Ao final da hospedagem, retire também o lixo do banheiro e leve ao local de descarte do condomínio</li>
+      </ul>
+      <div class="r-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="15.8" r=".2" fill="currentColor"/></svg>
+        <p>Por segurança e economia de energia, <b>desligue sempre o aquecedor de toalhas ao sair</b> do Studio.</p>
+      </div>
+    </section>
+
+    <section class="r-block" id="ar">
+      <div class="r-block__head">
+        <div class="r-block__icon">❄️</div>
+        <h2>Ar-condicionado</h2>
+      </div>
+      <p class="r-lead">O EP209 possui ar-condicionado quente/frio para proporcionar maior conforto durante sua permanência.</p>
+      <ul class="r-list">
+        <li>Mantenha portas e janelas fechadas enquanto o equipamento estiver em funcionamento, garantindo maior eficiência</li>
+        <li>Desligue o ar-condicionado sempre que sair do Studio, mesmo que seja por algumas horas</li>
+        <li>Evite manter o aparelho funcionando desnecessariamente quando o ambiente já estiver confortável</li>
+      </ul>
+      <p class="r-lead" style="margin-top:12px">Além de preservar o equipamento, esses cuidados contribuem para o uso consciente de energia.</p>
+    </section>
+
+    <section class="r-block" id="tv">
+      <div class="r-block__head">
+        <div class="r-block__icon">📺</div>
+        <h2>Smart TV</h2>
+      </div>
+      <p class="r-lead">A Smart TV está disponível para seu entretenimento durante a hospedagem.</p>
+      <ul class="r-list">
+        <li>Utilize o equipamento normalmente e evite alterar configurações avançadas do aparelho</li>
+        <li>Caso acesse aplicativos com contas pessoais de streaming, lembre-se de realizar o logout antes do check-out</li>
+        <li>Desligue a Smart TV sempre que sair do Studio</li>
+      </ul>
+    </section>
+
+    <section class="r-block" id="roupa-cama">
+      <div class="r-block__head">
+        <div class="r-block__icon">🛏️</div>
+        <h2>Cobertores, edredons e travesseiros adicionais</h2>
+      </div>
+      <p class="r-lead">O EP209 disponibiliza cobertores, edredons e travesseiros adicionais, guardados nos boxes organizadores para que fiquem protegidos e higienizados até o momento do uso.</p>
+      <ul class="r-list">
+        <li>Se algum desses itens for retirado do box organizador e utilizado durante a hospedagem, não o coloque novamente no box</li>
+        <li>Após o uso, deixe-o no armário, separado dos itens que permaneceram guardados</li>
+        <li>Assim, nossa equipe de limpeza saberá exatamente quais peças foram utilizadas e as encaminhará para lavagem antes da próxima hospedagem</li>
+        <li>Mesmo que uma peça tenha sido usada por pouco tempo, considere-a utilizada e deixe-a fora do box</li>
+      </ul>
+    </section>
+
+    <section class="r-block" id="fumo">
+      <div class="r-block__head">
+        <div class="r-block__icon">🚭</div>
+        <h2>Ambiente livre de fumo</h2>
+      </div>
+      <p class="r-lead">O EP209 é um ambiente 100% livre de fumo.</p>
+      <div class="r-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="15.8" r=".2" fill="currentColor"/></svg>
+        <p><b>Não é permitido fumar dentro do Studio</b>, incluindo cigarros, charutos, cigarros eletrônicos, vapes ou similares. Essa regra ajuda a preservar o ambiente, o mobiliário e o enxoval, além de garantir que os próximos hóspedes encontrem o Studio limpo, agradável e livre de odores.</p>
+      </div>
+    </section>
+
+    <section class="r-block" id="pets">
+      <div class="r-block__head">
+        <div class="r-block__icon">🐾</div>
+        <h2>Animais de estimação</h2>
+      </div>
+      <p class="r-lead">Nós gostamos muito de pets! 🐶💛</p>
+      <div class="r-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="15.8" r=".2" fill="currentColor"/></svg>
+        <p>Entretanto, pelas características do Studio e para mantermos o padrão de limpeza e preparação do ambiente para todos os hóspedes, <b>não é permitida a hospedagem de animais de estimação</b> no EP209. Agradecemos muito a compreensão.</p>
+      </div>
+    </section>
+
+    <section class="r-block" id="checkout">
+      <div class="r-block__head">
+        <div class="r-block__icon">🗑️</div>
+        <h2>Lixo e organização no check-out</h2>
+      </div>
+      <p class="r-lead">Antes de deixar o EP209, pedimos a gentileza de:</p>
+      <ul class="r-list">
+        <li>Retirar o lixo da cozinha e do banheiro</li>
+        <li>Não deixar alimentos perecíveis no Studio</li>
+        <li>Deixar os utensílios utilizados lavados e organizados</li>
+        <li>Deixar fora dos boxes organizadores os cobertores, edredons ou travesseiros adicionais que tenham sido utilizados</li>
+        <li>Verificar se ar-condicionado, Smart TV, aquecedor de toalhas, cooktop e demais equipamentos elétricos estão desligados</li>
+        <li>Conferir seus objetos pessoais antes de deixar o Studio</li>
+      </ul>
+      <div class="r-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="15.8" r=".2" fill="currentColor"/></svg>
+        <p><b>Não é necessário realizar a limpeza do Studio</b> — essa parte é conosco. 😊 Pedimos apenas esses pequenos cuidados de organização.</p>
+      </div>
+    </section>
+
+    <section class="r-block" id="comunicacao">
+      <div class="r-block__head">
+        <div class="r-block__icon">💬</div>
+        <h2>Comunicação com o anfitrião</h2>
+      </div>
+      <p class="r-lead">Para sua segurança e para mantermos todas as informações da hospedagem devidamente registradas, todas as solicitações, dúvidas, alterações ou demais interações relacionadas à estadia devem ser realizadas pela plataforma do Airbnb — nosso canal oficial de comunicação durante toda a hospedagem.</p>
+      <div class="r-note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v5"/><circle cx="12" cy="15.8" r=".2" fill="currentColor"/></svg>
+        <p>Em caso de emergência ou situação que precise de atendimento imediato, você também pode chamar no <a href="https://wa.me/5511950571111?text=Ol%C3%A1!%20Estou%20hospedado%20no%20EP209%20e%20preciso%20de%20ajuda%20com%20algo%20urgente." target="_blank" rel="noopener"><b>WhatsApp do anfitrião</b></a>. Sempre que possível, mesmo nesses casos, mantemos depois o registro das informações relevantes pela plataforma do Airbnb.</p>
+      </div>
+    </section>
+
+    <div class="r-closing">
+      <h2>💛 Cuidando do EP209</h2>
+      <p>O EP209 foi preparado com muito carinho para oferecer uma experiência confortável, prática e acolhedora. Mais do que regras, estas orientações representam cuidados simples que ajudam a conservar o Studio e permitem que cada novo hóspede encontre o espaço tão agradável quanto você encontrou ao chegar.</p>
+      <p>Obrigado por cuidar do EP209 durante sua estadia. Aproveite sua hospedagem e sinta-se em casa!</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div>
+      <span class="brand__mark" style="font-family:var(--font-head);font-size:1.2rem">Essential Perdizes - EP209</span>
+      <p>Regras de utilização para consulta antes e durante a hospedagem.<br>Dúvidas? Fale com os anfitriões pelo WhatsApp.</p>
+    </div>
+    <p class="site-footer__legal">
+      Este guia é um material de apoio para hóspedes do EP209. Reservas, pagamentos e política de cancelamento são gerenciados exclusivamente pelo
+      <a href="https://www.airbnb.com.br/rooms/1728453226119477229" target="_blank" rel="noopener">anúncio no Airbnb</a>.
+    </p>
+  </div>
+</footer>
+
+<div class="float-actions">
+  <a class="float-wa" href="https://wa.me/5511950571111?text=Ol%C3%A1!%20Estou%20hospedado%20no%20EP209%20e%20tenho%20uma%20d%C3%BAvida." target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21h.01c5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2Zm0 18.15h-.01c-1.52 0-3.01-.41-4.31-1.18l-.31-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.24-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24Zm4.52-6.17c-.25-.12-1.47-.72-1.69-.81-.23-.08-.39-.12-.56.12-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.14.16-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.48-.4-.42-.56-.42-.14-.01-.31-.01-.47-.01-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.38 1 2.54.12.17 1.73 2.65 4.2 3.71.59.25 1.04.4 1.4.52.59.19 1.12.16 1.55.1.47-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.14-1.18-.06-.11-.22-.17-.47-.29Z"/></svg>
+    <span>WhatsApp</span>
+  </a>
+</div>
+
+<script>
+  const pills = Array.from(document.querySelectorAll(".r-pill"));
+  const sections = pills.map(p => document.querySelector(p.getAttribute("href"))).filter(Boolean);
+  const setActive = id => pills.forEach(p => p.classList.toggle("is-active", p.getAttribute("href") === "#" + id));
+  function stickyOffset() {
+    const top = document.querySelector(".r-top");
+    const nav = document.querySelector(".r-nav");
+    const navSticky = nav && getComputedStyle(nav).position === "sticky";
+    return (top ? top.offsetHeight : 0) + (navSticky ? nav.offsetHeight : 0) + 8;
+  }
+  let ticking = false;
+  function updateActive() {
+    ticking = false;
+    const threshold = stickyOffset();
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.getBoundingClientRect().top <= threshold) current = s;
+    }
+    if (current) setActive(current.id);
+  }
+  window.addEventListener("scroll", () => {
+    if (!ticking) { requestAnimationFrame(updateActive); ticking = true; }
+  }, { passive: true });
+  updateActive();
+</script>
+</body>
+</html>

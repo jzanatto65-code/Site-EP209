@@ -330,9 +330,9 @@ h1, h2, h3 { font-family: var(--font-head); font-weight: 500; line-height: 1.12;
 
 /* ---------- Responsive ---------- */
 /* Nav switches to the mobile menu earlier than the general layout breakpoint
-   below — with 7 links + the Reservar button, it starts wrapping awkwardly
-   on common notebook widths (1280–1366px) well before 960px. */
-@media (max-width: 1360px) {
+   below — with 8 links + the Reservar button, it starts wrapping awkwardly
+   on common notebook widths (1280–1460px) well before 960px. */
+@media (max-width: 1480px) {
   .nav {
     position: fixed; inset: 72px 0 auto 0;
     flex-direction: column; align-items: stretch; gap: 0;
