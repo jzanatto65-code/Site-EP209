@@ -48,7 +48,7 @@ Qualquer uma destas opções serve — é só subir a pasta inteira:
 | **Endereço no mapa** | `index.html`, `iframe` do Google Maps | Configurado para *Rua João Ramalho, 1041 – Perdizes*. Confirme o endereço do condomínio e ajuste o texto do `src` se necessário. |
 | **Preço de referência** | `index.html`, seção "Reservas" (`R$ 303`) | Valor aproximado visto no anúncio. Ajuste ou remova se preferir não fixar preço. |
 | **Link do Airbnb** | vários pontos do `index.html` | `https://www.airbnb.com.br/rooms/1728453226119477229` |
-| **Avaliações** | hero (`5,0 · 3 avaliações`) | Atualize conforme o anúncio evolui. |
+| **Avaliações** | hero (`5,0 · 5 avaliações`) | Atualize conforme o anúncio evolui. |
 
 ## Domínio próprio
 

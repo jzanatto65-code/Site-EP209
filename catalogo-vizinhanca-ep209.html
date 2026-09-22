@@ -275,7 +275,7 @@
     <h1>A vizinhança do <em>Studio EP209</em></h1>
     <p class="lede">Tudo o que dá para resolver a pé a partir do <strong>Essential Perdizes</strong> (Rua João Ramalho, 1.041) — padaria antes da reunião, mercado no fim do dia, farmácia, academia e os clássicos de Perdizes para levar uma visita. As distâncias foram medidas no Google Maps, do endereço do prédio até cada local.</p>
     <div class="runline">
-      <span><b>68</b> endereços</span>
+      <span><b>72</b> endereços</span>
       <span><b>Perdizes</b>, São&nbsp;Paulo</span>
       <span>origem: <b>Rua João Ramalho, 1.041</b></span>
       <span>a pé &amp; de carro pelo <b>Google Maps</b></span>
@@ -597,13 +597,31 @@ const PLACES = [
   {t:3,cat:"Serviços",name:"Borracharia JK",tipo:"Borracharia",walk:"23 min",dist:"1,6 km",car:"12 min",
    desc:"Borracharia bem avaliada na Água Branca — troca e conserto de pneus com equipamento moderno, aberta todos os dias.",
    addr:"R. Carlos Vicari, 235 — Água Branca",hours:"Todos os dias 7h–21h",tel:"11 98433-2546",
-   url:"https://pneusjk.com.br/",link:"pneusjk.com.br"}
+   url:"https://pneusjk.com.br/",link:"pneusjk.com.br"},
+
+  {t:4,cat:"Lazer",name:"Parque Ibirapuera",tipo:"Parque",walk:"",dist:"6,7 km",car:"13 min",
+   desc:"O parque urbano mais famoso de São Paulo — pistas de caminhada e ciclovia, lagos, museus (MAM, Afro Brasil, Oca) e Auditório Ibirapuera. Vale um passeio de um dia inteiro.",
+   addr:"Av. Pedro Álvares Cabral, s/n — Vila Mariana",hours:"Todos os dias 5h–23h",tel:"",
+   url:"https://www.parquedoibirapuera.org/",link:"parquedoibirapuera.org"},
+  {t:4,cat:"Lazer",name:"Parque Villa-Lobos",tipo:"Parque",walk:"",dist:"8,2 km",car:"16 min",
+   desc:"Um dos maiores parques da cidade, com trilhas arborizadas, pistas de skate e patinação, quadras esportivas e área para piquenique às margens do Rio Pinheiros.",
+   addr:"Av. Prof. Fonseca Rodrigues, 2.001 — Alto de Pinheiros",hours:"Todos os dias 5h30–19h (20h no horário de verão)",tel:"11 2683-6302",
+   url:"https://www.parquevillalobos.net/",link:"parquevillalobos.net"},
+  {t:4,cat:"Lazer",name:"Parque do Povo",tipo:"Parque",walk:"",dist:"9,5 km",car:"14 min",
+   desc:"Parque Mário Pimenta Camargo, no Itaim Bibi — área verde tranquila com pista de caminhada, playground e academia ao ar livre, cercada por torres corporativas.",
+   addr:"Av. Henrique Chamma, 420 — Itaim Bibi",hours:"Todos os dias 6h–22h",tel:"11 3073-1627",
+   url:"https://www.parquedopovo.org/",link:"parquedopovo.org"},
+  {t:4,cat:"Alimentação",name:"Cruzeiros Bar",tipo:"Bar e restaurante",walk:"",dist:"4,4 km",car:"12 min",
+   desc:"Bar estilo taverna muito bem avaliado, famoso pelas carnes na brasa (picanha, ancho, chorizo) e petiscos como o bolinho Caetano — ótima pedida para happy hour ou jantar.",
+   addr:"R. Cruzeiro, 952 — Barra Funda",hours:"Seg–Sáb 11h30–00h · Dom 11h30–22h",tel:"11 3392-6181",
+   url:"https://cruzeirosbar.com.br/",link:"cruzeirosbar.com.br"}
 ];
 
 const TIERS = {
   1:{label:"A pé · até 5 minutos",title:"Na porta do Studio",note:"Do quarteirão do EP209 e das ruas vizinhas — João Ramalho, Sumaré, Bartira, Apinajés, Iperoig. Dá para ir de chinelo."},
   2:{label:"A pé · 6 a 10 minutos",title:"Um ou dois quarteirões",note:"Ainda uma caminhada tranquila, descendo a João Ramalho ou entrando na Caiubí e na Bartira."},
-  3:{label:"A pé · 12 a 20 min — ou 3 a 12 de carro",title:"Vale caminhar ou pegar o carro",note:"Piracuama, Monte Alegre, Padre Chico e a região da Água Branca / Barra Funda: shoppings, cinemas, parque, arenas. Perto de metrô e trem (Palmeiras-Barra Funda). O Pacaembu é o ponto mais distante — 36 min a pé ou 12 min de carro."}
+  3:{label:"A pé · 12 a 20 min — ou 3 a 12 de carro",title:"Vale caminhar ou pegar o carro",note:"Piracuama, Monte Alegre, Padre Chico e a região da Água Branca / Barra Funda: shoppings, cinemas, parque, arenas. Perto de metrô e trem (Palmeiras-Barra Funda). O Pacaembu é o ponto mais distante — 36 min a pé ou 12 min de carro."},
+  4:{label:"De carro · 12 a 16 minutos",title:"Vale ir de carro",note:"Os grandes parques da cidade (Ibirapuera, Villa-Lobos, Parque do Povo) e o Cruzeiros Bar na Barra Funda — distantes demais para ir a pé, mas perto o suficiente para um passeio de carro ou app."}
 };
 
 const app = document.getElementById("app");
@@ -611,12 +629,12 @@ const emptyEl = document.getElementById("empty");
 let activeCat = "all";
 let query = "";
 
-const walkMin = p => parseInt(p.walk,10) || 0;
+const walkMin = p => parseInt(p.walk,10) || parseInt(p.car,10) || 0;
 
 function render(){
   app.innerHTML = "";
   let total = 0;
-  for(const t of [1,2,3]){
+  for(const t of [1,2,3,4]){
     const items = PLACES.filter(p=>p.t===t)
       .filter(p=>activeCat==="all"||p.cat===activeCat)
       .filter(p=>!query || (p.name+" "+p.tipo+" "+p.cat+" "+p.addr).toLowerCase().includes(query))
@@ -624,7 +642,7 @@ function render(){
     if(!items.length) continue;
     total += items.length;
     const sec = document.createElement("section");
-    sec.className = "tier"+(t===3?" tier--far":"");
+    sec.className = "tier"+(t>=3?" tier--far":"");
     const meta = TIERS[t];
     sec.innerHTML = `
       <p class="tier__label">${meta.label}</p>
@@ -641,8 +659,13 @@ function render(){
 function card(p){
   const el = document.createElement("article");
   el.className = "place";
-  const meta = [`<span class="m m--walk">a pé · <b>${p.walk}</b> · ${p.dist}</span>`];
-  if(p.car) meta.push(`<span class="m m--car">carro · <b>${p.car}</b></span>`);
+  const meta = [];
+  if(p.walk){
+    meta.push(`<span class="m m--walk">a pé · <b>${p.walk}</b> · ${p.dist}</span>`);
+    if(p.car) meta.push(`<span class="m m--car">carro · <b>${p.car}</b></span>`);
+  } else if(p.car){
+    meta.push(`<span class="m m--car">carro · <b>${p.car}</b> · ${p.dist}</span>`);
+  }
   const facts = [`<div><dt>Endereço</dt><dd>${p.addr}</dd></div>`];
   if(p.hours) facts.push(`<div><dt>Horário</dt><dd>${p.hours}</dd></div>`);
   if(p.tel) facts.push(`<div><dt>Telefone</dt><dd>${p.tel}</dd></div>`);
