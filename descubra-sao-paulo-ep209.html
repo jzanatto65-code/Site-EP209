@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Descubra São Paulo — EP209</title>
+<meta name="description" content="Pontos turísticos, museus, parques e passeios em São Paulo — uma seleção para quando a agenda permitir sair de Perdizes, com endereço e link do Google Maps para cada lugar.">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  :root{
+    color-scheme:light;
+    --paper:#f7f5ef;
+    --paper-rgb:247,245,239;
+    --surface:#ffffff;
+    --surface-2:#f1eee5;
+    --ink:#2a2f24;
+    --ink-soft:#63695a;
+    --line:#e6e3d8;
+    --accent:#2f6b3f;
+    --accent-ink:#255733;
+    --accent-soft:#e8f0e4;
+    --clay:#a4602a;
+    --shadow:0 1px 2px rgba(40,45,30,.04),0 12px 32px rgba(40,45,30,.07);
+    --radius:16px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Newsreader",Georgia,"Times New Roman",serif;
+    font-size:17.5px;
+    line-height:1.62;
+    font-optical-sizing:auto;
+  }
+  ::selection{background:var(--accent);color:#fff}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  /* ---------- back bar ---------- */
+  .backbar{
+    position:sticky;top:0;z-index:30;
+    background:rgba(247,245,239,.92);
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .backbar .wrap{display:flex;align-items:center;padding:11px 24px}
+  .backlink{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--ink-soft);text-decoration:none;
+  }
+  .backlink:hover{color:var(--accent-ink)}
+  .backlink svg{width:16px;height:16px}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:46px 0 40px;border-bottom:1px solid var(--line)}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent-ink);margin:0 0 16px;
+  }
+  h1{
+    font-family:"Bricolage Grotesque","Newsreader",sans-serif;
+    font-weight:800;
+    font-size:clamp(2.3rem,5.6vw,3.7rem);
+    line-height:1.03;letter-spacing:-.022em;text-wrap:balance;
+    margin:0 0 16px;
+  }
+  h1 em{font-style:normal;color:var(--accent)}
+  .lede{
+    font-size:clamp(1.06rem,2.1vw,1.28rem);
+    color:var(--ink-soft);max-width:62ch;margin:0 0 26px;
+  }
+  .lede strong{color:var(--ink);font-weight:600}
+  .runline{
+    display:flex;flex-wrap:wrap;gap:9px 22px;
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12.5px;letter-spacing:.03em;color:var(--ink-soft);
+    border-top:1px solid var(--line);padding-top:20px;
+  }
+  .runline b{color:var(--ink);font-weight:600}
+
+  /* ---------- controls ---------- */
+  .controls{
+    position:sticky;top:0;z-index:20;
+    background:var(--paper);
+    border-bottom:1px solid var(--line);
+    padding:13px 0;
+  }
+  .controls .wrap{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .filters{display:flex;flex-wrap:wrap;gap:7px}
+  .chipbtn{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+    padding:7px 13px;border-radius:999px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);
+    cursor:pointer;transition:background .15s,color .15s,border-color .15s;
+  }
+  .chipbtn:hover{border-color:var(--accent);color:var(--ink)}
+  .chipbtn[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fbfaf6}
+  .search{margin-left:auto;position:relative;flex:1 1 190px;max-width:280px}
+  .search input{
+    width:100%;font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12.5px;letter-spacing:.03em;
+    padding:9px 12px 9px 32px;border-radius:999px;
+    border:1px solid var(--line);background:var(--surface);color:var(--ink);
+  }
+  .search input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);width:14px;height:14px;color:var(--ink-soft)}
+
+  /* ---------- sections ---------- */
+  main{padding:8px 0 40px}
+  .tier{padding:44px 0 8px;border-top:1px solid var(--line)}
+  .tier:first-child{border-top:0}
+  .tier__label{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:12px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--accent-ink);margin:0 0 7px;
+  }
+  .tier h2{
+    font-family:"Bricolage Grotesque",sans-serif;
+    font-weight:700;font-size:clamp(1.55rem,3.4vw,2.05rem);
+    letter-spacing:-.015em;margin:0 0 7px;
+  }
+  .tier__count{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--ink-soft);font-weight:500}
+  .tier__note{color:var(--ink-soft);margin:0 0 26px;max-width:60ch;font-size:1rem}
+
+  .grid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+
+  /* ---------- card ---------- */
+  .place{
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:22px 22px 20px;
+    box-shadow:var(--shadow);
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .place__head{display:flex;align-items:flex-start;gap:10px;justify-content:space-between}
+  .place__head h3{
+    font-family:"Bricolage Grotesque",sans-serif;
+    font-weight:700;font-size:1.22rem;line-height:1.22;
+    letter-spacing:-.012em;margin:0;text-wrap:balance;
+  }
+  .tag{
+    flex:none;
+    font-family:"IBM Plex Mono",monospace;
+    font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--accent-ink);background:var(--accent-soft);
+    padding:4px 8px;border-radius:6px;white-space:nowrap;margin-top:3px;
+  }
+  .meta{display:flex;flex-wrap:wrap;gap:6px}
+  .m{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:11px;letter-spacing:.03em;text-transform:uppercase;
+    padding:5px 9px;border-radius:7px;
+    border:1px solid var(--line);color:var(--ink-soft);
+  }
+  .m--zone{border-color:color-mix(in srgb,var(--clay) 40%,var(--line));color:var(--clay)}
+  .place__desc{margin:0;font-size:1.02rem;color:var(--ink)}
+  .facts{margin:0;display:flex;flex-direction:column;gap:6px;border-top:1px solid var(--line);padding-top:13px}
+  .facts>div{display:grid;grid-template-columns:76px 1fr;gap:10px;font-size:.94rem}
+  .facts dt{
+    font-family:"IBM Plex Mono",monospace;
+    font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--ink-soft);padding-top:2px;
+  }
+  .facts dd{margin:0;color:var(--ink)}
+  .place__link{
+    margin-top:auto;align-self:flex-start;
+    font-family:"IBM Plex Mono",monospace;font-size:11.5px;
+    letter-spacing:.05em;text-transform:uppercase;
+    color:var(--accent-ink);text-decoration:none;
+    border-bottom:1px solid color-mix(in srgb,var(--accent) 45%,transparent);
+    padding-bottom:2px;
+  }
+  .place__link:hover{border-bottom-color:var(--accent)}
+  .place__link:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  .empty{
+    display:none;padding:50px 0;text-align:center;color:var(--ink-soft);
+    font-family:"IBM Plex Mono",monospace;font-size:13px;letter-spacing:.04em;
+  }
+
+  footer{border-top:1px solid var(--line);background:var(--surface);padding:36px 0 48px}
+  footer .eyebrow{color:var(--accent-ink);margin-bottom:14px}
+  footer p{margin:0 0 10px;font-size:.92rem;color:var(--ink-soft);max-width:74ch}
+  footer a{color:var(--accent-ink)}
+
+  @media (max-width:680px){
+    .masthead{padding:28px 0 30px}
+    .grid{grid-template-columns:1fr}
+    .facts>div{grid-template-columns:68px 1fr}
+
+    /* filtros em coluna única no celular, em vez da barra horizontal */
+    .controls{position:static}
+    .controls .wrap{flex-direction:column;align-items:stretch;gap:14px}
+    .filters{flex-direction:column;gap:8px}
+    .chipbtn{width:100%;text-align:left;padding:12px 16px;font-size:12.5px}
+    .search{margin-left:0;max-width:none;width:100%;flex:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="backbar">
+  <div class="wrap">
+    <a href="index.html" class="backlink">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      <span>EP209</span>
+    </a>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="wrap">
+    <p class="eyebrow">Para quando sobrar tempo &middot; Studio EP209</p>
+    <h1>Descubra <em>São Paulo</em></h1>
+    <p class="lede">Uma seleção de pontos turísticos, museus, parques e passeios pela cidade — para os dias (ou horas) livres entre um compromisso e outro. Organizado por tema, com endereço e link direto para o Google Maps de cada lugar.</p>
+    <div class="runline">
+      <span><b>30</b> destinos</span>
+      <span><b>São Paulo</b>, SP</span>
+      <span>organizado por <b>tema</b></span>
+      <span>endereços &amp; links pelo <b>Google Maps</b></span>
+      <span>out/2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="controls">
+  <div class="wrap">
+    <div class="filters" id="filters" role="group" aria-label="Filtrar por categoria">
+      <button class="chipbtn" data-cat="all" aria-pressed="true">Todos</button>
+      <button class="chipbtn" data-cat="Cultura" aria-pressed="false">Cultura</button>
+      <button class="chipbtn" data-cat="Natureza & Parques" aria-pressed="false">Natureza &amp; Parques</button>
+      <button class="chipbtn" data-cat="Passeios & Mirantes" aria-pressed="false">Passeios &amp; Mirantes</button>
+      <button class="chipbtn" data-cat="Gastronomia" aria-pressed="false">Gastronomia</button>
+      <button class="chipbtn" data-cat="Eventos & Negócios" aria-pressed="false">Eventos &amp; Negócios</button>
+    </div>
+    <label class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m21 21-4.3-4.3"></path></svg>
+      <input type="search" id="q" placeholder="buscar lugar…" aria-label="Buscar por nome">
+    </label>
+  </div>
+</div>
+
+<main class="wrap" id="app"></main>
+<p class="empty" id="empty">nenhum lugar com esse filtro.</p>
+
+<footer>
+  <div class="wrap">
+    <p class="eyebrow">Notas</p>
+    <p>Lista pensada para quem está hospedado no Studio EP209 e tem um tempo livre na agenda — não é um roteiro fechado, mas um ponto de partida para montar o seu. Nem todos os destinos ficam perto de Perdizes; vários exigem carro, app de transporte ou metrô.</p>
+    <p>Horários, preços de ingresso e dias de funcionamento mudam com frequência — confirme no site oficial de cada lugar antes de sair, principalmente museus (que costumam fechar às segundas-feiras) e parques estaduais.</p>
+    <p>Endereços e links conferidos no Google Maps.</p>
+  </div>
+</footer>
+
+<script>
+const PLACES = [
+  // ---------- CULTURA ----------
+  {cat:"Cultura",name:"MASP",tipo:"Museu de arte",zone:"Bela Vista",
+   desc:"Museu de Arte de São Paulo Assis Chateaubriand — o prédio suspenso de Lina Bo Bardi na Avenida Paulista e um dos acervos de arte mais importantes da América Latina.",
+   addr:"Av. Paulista, 1.578 — Bela Vista",
+   url:"https://maps.app.goo.gl/PmJAGkwsYQ5MuE8t8",link:"ver no mapa"},
+  {cat:"Cultura",name:"Pinacoteca de São Paulo",tipo:"Museu de arte",zone:"Luz",
+   desc:"O museu de arte mais antigo da cidade, num prédio histórico da Luz — acervo de arte brasileira dos séculos XIX e XX.",
+   addr:"Pça. da Luz, 2 — Luz",
+   url:"https://maps.app.goo.gl/7f6CgvsZpTpSkyK19",link:"ver no mapa"},
+  {cat:"Cultura",name:"Catedral da Sé",tipo:"Catedral",zone:"Sé",
+   desc:"Catedral neogótica no marco zero da cidade, com torres de 92 metros e um dos maiores órgãos de tubos da América Latina.",
+   addr:"Praça da Sé, s/nº — Sé",
+   url:"https://maps.app.goo.gl/brJ6RPT6DciVP2DJ8",link:"ver no mapa"},
+  {cat:"Cultura",name:"Museu do Ipiranga",tipo:"Museu histórico",zone:"Ipiranga",
+   desc:"Museu Paulista, o prédio-monumento onde a Independência do Brasil foi proclamada — reaberto após ampla restauração, com acervo sobre a história do país.",
+   addr:"R. dos Patriotas, 100 — Ipiranga",
+   url:"https://maps.app.goo.gl/bijWeymaefKrpjp68",link:"ver no mapa"},
+  {cat:"Cultura",name:"Theatro Municipal de São Paulo",tipo:"Teatro histórico",zone:"República",
+   desc:"Teatro de 1911 inspirado na Ópera de Paris, palco da Semana de Arte Moderna de 1922 — visitas guiadas e temporada de ópera, balé e concertos.",
+   addr:"Praça Ramos de Azevedo, s/nº — República",
+   url:"https://maps.app.goo.gl/6onzkYmE8jat73JC8",link:"ver no mapa"},
+  {cat:"Cultura",name:"Museu da Língua Portuguesa",tipo:"Museu temático",zone:"Luz",
+   desc:"Museu interativo dedicado à língua portuguesa, na Estação da Luz — reaberto em 2021 após incêndio, com exposições multimídia.",
+   addr:"Praça da Luz, s/nº — Luz",
+   url:"https://maps.app.goo.gl/3gYCFhAE12iicEyK8",link:"ver no mapa"},
+  {cat:"Cultura",name:"Museu do Futebol",tipo:"Museu temático",zone:"Pacaembu",
+   desc:"Museu interativo sobre a história do futebol brasileiro, dentro da Mercado Livre Arena Pacaembu — exposições, filmes e memorabilia para todas as idades.",
+   addr:"Praça Charles Miller, s/nº — Pacaembu",
+   url:"https://maps.app.goo.gl/rkFdJ27e2pS11Yfc6",link:"ver no mapa"},
+  {cat:"Cultura",name:"SESC Pompeia",tipo:"Centro cultural",zone:"Água Branca",
+   desc:"Antigo conjunto de tambores reconvertido por Lina Bo Bardi num dos centros culturais mais premiados do mundo — teatro, biblioteca, piscina, quadras e programação o ano todo.",
+   addr:"R. Clélia, 93 — Água Branca",
+   url:"https://maps.app.goo.gl/C9CVTtbQoVu6MKk68",link:"ver no mapa"},
+  {cat:"Cultura",name:"Memorial da América Latina",tipo:"Centro cultural",zone:"Barra Funda",
+   desc:"Conjunto de Oscar Niemeyer dedicado à integração latino-americana, com a icônica mão sangrando — biblioteca, salão de atos e feira de artesanato aos fins de semana.",
+   addr:"Av. Auro Soares de Moura Andrade, 664 — Barra Funda",
+   url:"https://maps.app.goo.gl/g3S5VDdZgYUhxN317",link:"ver no mapa"},
+  {cat:"Cultura",name:"Centro Cultural Banco do Brasil",tipo:"Centro cultural",zone:"Centro",
+   desc:"Prédio histórico no Centro com exposições de arte, cinema e programação cultural gratuita ou a preços populares.",
+   addr:"R. Álvares Penteado, 112 — Centro",
+   url:"https://maps.app.goo.gl/jqUSQGPhpfBf6atZA",link:"ver no mapa"},
+  {cat:"Cultura",name:"Casa das Rosas",tipo:"Espaço cultural",zone:"Bela Vista",
+   desc:"Mansão de 1935 na Avenida Paulista, hoje espaço cultural dedicado à literatura — exposições, saraus e livraria.",
+   addr:"Av. Paulista, 37 — Bela Vista",
+   url:"https://maps.app.goo.gl/xVvNQq5NfqMvnL3Z9",link:"ver no mapa"},
+  {cat:"Cultura",name:"Sala São Paulo",tipo:"Sala de concertos",zone:"Campos Elíseos",
+   desc:"Sala de concertos erguida no antigo Hall da Estação Júlio Prestes, sede da OSESP — uma das salas de concerto mais premiadas do mundo.",
+   addr:"Praça Júlio Prestes, 16 — Campos Elíseos",
+   url:"https://maps.app.goo.gl/y3fn1SkZVk1uHcW17",link:"ver no mapa"},
+
+  // ---------- NATUREZA & PARQUES ----------
+  {cat:"Natureza & Parques",name:"Parque Ibirapuera",tipo:"Parque urbano",zone:"Vila Mariana",
+   desc:"O parque urbano mais famoso de São Paulo — lagos, museus (MAM, Afro Brasil, Oca) e pistas de caminhada e ciclovia. Vale um passeio de um dia inteiro.",
+   addr:"Av. Pedro Álvares Cabral, s/nº — Vila Mariana",
+   url:"https://maps.app.goo.gl/KxG4rKKgCVEnh5bS9",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Parque Villa-Lobos",tipo:"Parque urbano",zone:"Alto de Pinheiros",
+   desc:"Um dos maiores parques da cidade, com trilhas arborizadas, pistas de skate e patinação, quadras esportivas e área para piquenique às margens do Rio Pinheiros.",
+   addr:"Av. Prof. Fernando Mendes de Almeida, s/nº — Alto de Pinheiros",
+   url:"https://maps.app.goo.gl/YGE52NLAcYWSCmum6",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Parque do Povo",tipo:"Parque urbano",zone:"Itaim Bibi",
+   desc:"Parque Mário Pimenta Camargo, no Itaim Bibi — área verde tranquila com pista de caminhada, playground e academia ao ar livre, cercada por torres corporativas.",
+   addr:"Av. Henrique Chamma, 420 — Pinheiros",
+   url:"https://maps.app.goo.gl/4fcUDcrSCrPFwSe38",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Jardim Botânico de São Paulo",tipo:"Jardim botânico",zone:"Água Funda",
+   desc:"Reserva de mata atlântica com trilhas, orquidário, viveiros e um lago com vitórias-régias — na zona sul, perto do Zoológico.",
+   addr:"Av. Miguel Stéfano, 3.031 — Água Funda",
+   url:"https://maps.app.goo.gl/dvZnpT9qtQ5wyQuq8",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Parque Estadual da Cantareira",tipo:"Parque estadual",zone:"Horto Florestal",
+   desc:"Um dos maiores parques urbanos de floresta do mundo, com trilhas, cachoeiras e vista da cidade a partir da zona norte.",
+   addr:"R. do Horto, 1.799 — Horto Florestal",
+   url:"https://maps.app.goo.gl/tHn7mbziRi7KnWqZ7",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Horto Florestal",tipo:"Parque / área verde",zone:"Horto Florestal",
+   desc:"Área verde ao lado do Parque da Cantareira, com trilhas mais leves, viveiro de mudas e espaço para piquenique em família.",
+   addr:"R. do Horto, 931 — Horto Florestal",
+   url:"https://maps.app.goo.gl/tHn7mbziRi7KnWqZ7",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Zoológico de São Paulo",tipo:"Zoológico",zone:"Água Funda",
+   desc:"Um dos maiores zoológicos da América Latina, em meio à mata atlântica — mais de 3 mil animais de cerca de 300 espécies.",
+   addr:"Av. Miguel Stéfano, 4.241 — Água Funda",
+   url:"https://maps.app.goo.gl/g9FjRPkjKWtxDrTn7",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Simba Safari",tipo:"Safári drive-thru",zone:"Água Funda",
+   desc:"Safári dentro do carro, no mesmo complexo do Zoológico de SP — percorra a reserva com leões, girafas, zebras e outros animais soltos.",
+   addr:"Av. Miguel Stéfano, 4.241 — Água Funda",
+   url:"https://maps.app.goo.gl/rqgo6jBSC6uiqS7u6",link:"ver no mapa"},
+  {cat:"Natureza & Parques",name:"Animália Park",tipo:"Zoológico / parque",zone:"Cotia",
+   desc:"Zoológico e parque de diversões em Cotia, na Grande São Paulo — bom programa para famílias com crianças, fora do centro da cidade.",
+   addr:"Estrada do Furquim, 1.490 — Cotia",
+   url:"https://maps.app.goo.gl/G4N1zz9rCoM9aQmx6",link:"ver no mapa"},
+
+  // ---------- PASSEIOS & MIRANTES ----------
+  {cat:"Passeios & Mirantes",name:"Avenida Paulista",tipo:"Avenida / cartão-postal",zone:"Bela Vista",
+   desc:"O principal cartão-postal da cidade — museus, prédios históricos, o Parque Trianon e, aos domingos, fechada para pedestres e ciclistas.",
+   addr:"Av. Paulista — Bela Vista",
+   url:"https://maps.app.goo.gl/rV6PVJRjDcKLoAGP7",link:"ver no mapa"},
+  {cat:"Passeios & Mirantes",name:"Beco do Batman",tipo:"Arte urbana",zone:"Vila Madalena",
+   desc:"Galeria de grafite a céu aberto na Vila Madalena, com obras que mudam com frequência — ótimo passeio a pé, cercado de bares e cafés.",
+   addr:"R. Gonçalo Afonso, 17 — Vila Madalena",
+   url:"https://maps.app.goo.gl/BVQburiXWrUfnFqVA",link:"ver no mapa"},
+  {cat:"Passeios & Mirantes",name:"Liberdade",tipo:"Bairro / cultura oriental",zone:"Liberdade",
+   desc:"Bairro de cultura oriental, com a Praça da Liberdade, lojinhas, templos e a maior comunidade japonesa fora do Japão — vale a feira de fim de semana.",
+   addr:"Praça da Liberdade — Liberdade",
+   url:"https://maps.app.goo.gl/9nXtbMdD4qiJNvCv5",link:"ver no mapa"},
+  {cat:"Passeios & Mirantes",name:"Farol Santander",tipo:"Mirante / centro cultural",zone:"Centro Histórico",
+   desc:"Mirante de 360° no topo de um dos primeiros arranha-céus de São Paulo, com exposições e vista da cidade a partir do alto.",
+   addr:"R. João Brícola, 24 — Centro Histórico",
+   url:"https://maps.app.goo.gl/tF9L3M8QfdFFpyHc9",link:"ver no mapa"},
+  {cat:"Passeios & Mirantes",name:"Terraço Itália",tipo:"Mirante / restaurante",zone:"República",
+   desc:"Mirante e restaurante giratório no 41º andar de um dos prédios mais altos do centro — vista panorâmica da cidade, principalmente ao entardecer.",
+   addr:"Av. Ipiranga, 344 — 41º andar — República",
+   url:"https://maps.app.goo.gl/CkxYw1nThHRbXnN79",link:"ver no mapa"},
+
+  // ---------- GASTRONOMIA ----------
+  {cat:"Gastronomia",name:"Mercado Municipal de São Paulo",tipo:"Mercado histórico",zone:"Centro Histórico",
+   desc:"O Mercadão — mercado histórico de 1933, famoso pelo sanduíche de mortadela, pelo pastel de bacalhau e por uma variedade imensa de frutas e temperos.",
+   addr:"R. da Cantareira, 306 — Centro Histórico",
+   url:"https://maps.app.goo.gl/BwExVKnA7Gr98A5F7",link:"ver no mapa"},
+  {cat:"Gastronomia",name:"Mercado da Lapa",tipo:"Mercado municipal",zone:"Lapa",
+   desc:"Versão mais tranquila e menos turística do Mercadão, no bairro da Lapa — boas opções de comida e produtos frescos.",
+   addr:"R. Guaicurus, 1.394 — Lapa",
+   url:"https://maps.app.goo.gl/KHkZ6SaFkq8nHGq39",link:"ver no mapa"},
+
+  // ---------- EVENTOS & NEGÓCIOS ----------
+  {cat:"Eventos & Negócios",name:"São Paulo Expo",tipo:"Centro de exposições",zone:"Vila Água Funda",
+   desc:"Um dos maiores centros de exposições e convenções do país, na zona sul — grandes feiras, congressos e eventos corporativos.",
+   addr:"Rod. dos Imigrantes, km 1,5 — Vila Água Funda",
+   url:"https://maps.app.goo.gl/B3ghbxxGc4ZMNeXM6",link:"ver no mapa"},
+  {cat:"Eventos & Negócios",name:"Distrito Anhembi",tipo:"Centro de eventos",zone:"Santana",
+   desc:"Complexo de eventos na zona norte, com o Sambódromo e pavilhões para grandes shows, feiras e convenções.",
+   addr:"Av. Olavo Fontoura, 1.209 — Santana",
+   url:"https://maps.app.goo.gl/g8b6qTNfpMX3tVpZ7",link:"ver no mapa"}
+];
+
+const CATS = {
+  "Cultura":{label:"Museus, teatros e centros culturais",title:"Cultura",note:"Museus, teatros, salas de concerto e centros culturais espalhados pela cidade — a maioria fecha às segundas-feiras."},
+  "Natureza & Parques":{label:"Parques, trilhas e zoológicos",title:"Natureza & Parques",note:"Áreas verdes dentro e ao redor da cidade — bons programas para o dia inteiro, de carro ou aplicativo."},
+  "Passeios & Mirantes":{label:"Ruas, bairros e vistas da cidade",title:"Passeios & Mirantes",note:"Lugares para caminhar, fotografar e ver São Paulo de cima."},
+  "Gastronomia":{label:"Mercados históricos",title:"Gastronomia",note:"Mercados tradicionais para provar um pouco da culinária paulistana."},
+  "Eventos & Negócios":{label:"Centros de convenções",title:"Eventos & Negócios",note:"Grandes centros de exposições, shows e convenções da cidade."}
+};
+const CAT_ORDER = ["Cultura","Natureza & Parques","Passeios & Mirantes","Gastronomia","Eventos & Negócios"];
+
+const app = document.getElementById("app");
+const emptyEl = document.getElementById("empty");
+let activeCat = "all";
+let query = "";
+
+function render(){
+  app.innerHTML = "";
+  let total = 0;
+  for(const cat of CAT_ORDER){
+    const items = PLACES.filter(p=>p.cat===cat)
+      .filter(p=>activeCat==="all"||p.cat===activeCat)
+      .filter(p=>!query || (p.name+" "+p.tipo+" "+p.cat+" "+p.zone+" "+p.addr).toLowerCase().includes(query))
+      .sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
+    if(!items.length) continue;
+    total += items.length;
+    const sec = document.createElement("section");
+    sec.className = "tier";
+    const meta = CATS[cat];
+    sec.innerHTML = `
+      <p class="tier__label">${meta.label}</p>
+      <h2>${meta.title} <span class="tier__count">· ${items.length}</span></h2>
+      <p class="tier__note">${meta.note}</p>
+      <div class="grid"></div>`;
+    const grid = sec.querySelector(".grid");
+    for(const p of items) grid.appendChild(card(p));
+    app.appendChild(sec);
+  }
+  emptyEl.style.display = total ? "none" : "block";
+}
+
+function card(p){
+  const el = document.createElement("article");
+  el.className = "place";
+  const facts = [`<div><dt>Endereço</dt><dd>${p.addr}</dd></div>`];
+  el.innerHTML = `
+    <div class="place__head">
+      <h3>${p.name}</h3>
+      <span class="tag">${p.tipo}</span>
+    </div>
+    <div class="meta"><span class="m m--zone">${p.zone}</span></div>
+    <p class="place__desc">${p.desc}</p>
+    <dl class="facts">${facts.join("")}</dl>
+    <a class="place__link" href="${p.url}" target="_blank" rel="noopener">📍 ${p.link}</a>`;
+  return el;
+}
+
+document.getElementById("filters").addEventListener("click",e=>{
+  const b = e.target.closest(".chipbtn");
+  if(!b) return;
+  activeCat = b.dataset.cat;
+  document.querySelectorAll("#filters .chipbtn").forEach(x=>x.setAttribute("aria-pressed", x===b));
+  render();
+});
+document.getElementById("q").addEventListener("input",e=>{
+  query = e.target.value.trim().toLowerCase();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
